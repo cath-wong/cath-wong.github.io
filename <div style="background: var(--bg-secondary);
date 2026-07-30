@@ -129,13 +129,8 @@
         <div style="max-width: 800px;">
           <h2 style="font-size: 1.8rem; margin-bottom: 1.2rem;">Methodological Overview</h2>
           
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
-            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-              <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary);">Type-Token Ratio (TTR)</h3>
-              <p style="font-size: 0.9rem; color: var(--text-secondary);">
-                Calculates the proportion of unique vocabulary tokens relative to the total word count. High TTR scores indicate rich lexical variety, typical of Renaissance verse and formal rhetoric.
-              </p>
-            </div>
+          <div style="display: grid; grid-template-columns: 1fr; gap: 2rem; margin-top: 1.5rem;">
+            
 
             <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
               <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary);">Archaism Density</h3>

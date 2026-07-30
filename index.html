@@ -1,0 +1,1015 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catherine Wong | Digital Humanities, Language and Identity</title>
+  <meta name="description"
+    content="Personal academic homepage of Catherine Wong, a scholar specialising in Digital Humanities, Language and Identity.">
+  <meta name="keywords"
+    content="Catherine Wong, Digital Humanities, Language and Identity, Stylistics, Corpus Linguistics">
+  <meta name="author" content="Dr Catherine Wong">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container">
+      <a href="#hero" class="nav-brand" id="navBrand">
+        <span class="nav-brand-title">Catherine Wong</span>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="#about" class="nav-link" id="linkAbout">About</a></li>
+          <li><a href="#publications" class="nav-link" id="linkPublications">Publications</a></li>
+          <li><a href="#presentations" class="nav-link" id="linkPresentations">Presentations</a></li>
+          <li><a href="#tools" class="nav-link" id="linkTools">Tools</a></li>
+          <!-- <li><a href="#teaching" class="nav-link" id="linkTeaching">Teaching</a></li> -->
+          <li><a href="#contact" class="nav-link" id="linkContact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-main">
+            <div class="hero-badge-wrap">
+              <!-- <span class="badge-yellow">About</span> -->
+            </div>
+
+            <h1 class="hero-title">
+              Digital Humanities, Language and Identity
+            </h1>
+
+            <p class="hero-subtitle">Computational Methods | Corpus Linguistics | Cultural Analytics</p>
+
+            <div class="hero-actions">
+              <a href="#publications" class="btn btn-charcoal" id="btnHeroPubs">
+                View Publications
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </a>
+              <a href="#tools" class="btn btn-primary" id="btnHeroDemo">
+                Explore DH Tools
+                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M9 18l6-6-6-6" />
+                </svg>
+              </a>
+              <a href="#contact" class="btn btn-outline" id="btnHeroContact">Get in Touch</a>
+            </div>
+
+            <aside class="hero-card" id="heroCard">
+              <div class="hero-card-header">
+                <div class="hero-card-identity">
+                  <h2 class="hero-card-name">Catherine Wong</h2>
+                  <span class="hero-card-role">PhD (Liverpool)</span>
+                </div>
+                <div class="hero-card-socials">
+                  <a href="https://orcid.org/0000-0002-5421-1458" target="_blank" rel="noopener" class="social-btn"
+                    id="socialOrcid" aria-label="ORCID Profile" title="ORCID Profile">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                      <path
+                        d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947s-.422.947-.947.947a.95.95 0 0 1-.947-.947c0-.525.422-.947.947-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.016-5.325 5.016h-3.919V7.416zm1.444 1.303v7.444h2.297c2.559 0 3.844-1.631 3.844-3.722 0-2.016-1.191-3.722-3.844-3.722h-2.297z" />
+                    </svg>
+                  </a>
+                  <a href="https://scholar.google.com" target="_blank" rel="noopener" class="social-btn"
+                    id="socialScholar" aria-label="Google Scholar Profile" title="Google Scholar Profile">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                      <path
+                        d="M12 2L1 7.5L12 13L23 7.5L12 2ZM5.242 12.769L12 16.444L18.758 12.769V16.5C18.758 18.985 15.733 21 12 21C8.267 21 5.242 18.985 5.242 16.5V12.769Z" />
+                    </svg>
+                  </a>
+                  <a href="https://github.com/catherinewong" target="_blank" rel="noopener" class="social-btn"
+                    id="socialGithub" aria-label="GitHub Profile">
+                    <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                      <path
+                        d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z" />
+                    </svg>
+                  </a>
+                </div>
+              </div>
+
+              <ul class="hero-card-meta">
+                <li>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M19 21V5a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5m0 0h5" />
+                  </svg>
+                  <span>Digital Humanities Institute, University of Sheffield</span>
+                </li>
+                <li>
+                  <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <path d="M22 6l-10 7L2 6" />
+                  </svg>
+                  <span>catherine.wong@sheffield.ac.uk</span>
+                </li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Biography &amp; Academic Background</span>
+          <h2 class="section-title">Bridging Computational Methods and Humanistic Inquiry</h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="bio-text">
+            <p class="bio-lead">
+              Catherine Wong is a Digital Humanities researcher whose work explores how computational methods can complement traditional humanities approaches to generate new perspectives on language, culture and historical change. Her research is driven by methodological questions concerning data, evidence, interpretation and explanation, with applications spanning historical linguistics, corpus stylistics, cultural analytics and research software.
+            </p>
+          </div>
+
+          <div class="pillars-grid">
+            <div class="pillar-card">
+              <div class="pillar-icon">01</div>
+              <h3 class="pillar-title">Computational Stylistics</h3>
+              <p class="pillar-desc">Applying computational stylistic methods to investigate how linguistic and stylistic choices construct narrative and meaning in literary and cultural texts.</p>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-icon">02</div>
+              <h3 class="pillar-title">Historical Corpora &amp; NLP</h3>
+              <p class="pillar-desc">Transforming historical texts into computationally analysable datasets through corpus development and NLP.</p>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-icon">03</div>
+              <h3 class="pillar-title">Research Software</h3>
+              <p class="pillar-desc">Translating computational methods into intuitive research tools for humanities</p>
+            </div>
+
+            <div class="pillar-card">
+              <div class="pillar-icon">04</div>
+              <h3 class="pillar-title">Language, Culture &amp; Identity</h3>
+              <p class="pillar-desc">Examining language as a site of cultural expression, identity formation, and social change</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications Section -->
+    <section class="section" id="publications">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Scholarship &amp; Outputs</span>
+          <h2 class="section-title">Publications</h2>
+        </div>
+
+        <div class="pub-toolbar">
+          <div class="pub-filters">
+            <button class="filter-btn active" data-filter="all" id="filterAll">All Outputs</button>
+            <button class="filter-btn" data-filter="journal" id="filterJournals">Journal Articles</button>
+            <button class="filter-btn" data-filter="chapter" id="filterChapters">Book Chapters</button>
+            <button class="filter-btn" data-filter="edited" id="filterEdited">Edited Volumes & Special Issues</button>
+          </div>
+
+          <div class="pub-search">
+            <svg class="pub-search-icon" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"
+              viewBox="0 0 24 24">
+              <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input type="text" id="pubSearchInput" class="pub-search-input"
+              placeholder="Search title, year, or keyword...">
+          </div>
+        </div>
+
+        <div class="pub-list" id="pubList">
+
+          <!-- 1. Special Issue 2026 -->
+          <article class="pub-item" data-type="edited">
+            <div class="pub-year">2026</div>
+            <div class="pub-content">
+              <span class="pub-type">Edited Special Issue (Forthcoming)</span>
+              <h3 class="pub-title">Cantonese as Cultural Expression: Language, Identity, and Everyday Creativity in
+                Hong Kong</h3>
+              <div class="pub-venue">Special Issue in <em>Journal of Language and Pop Culture</em>, C. Wong &amp; C. Lam
+                (eds.)</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Cantonese Language</span>
+                <span class="tag-sm">Pop Culture</span>
+                <span class="tag-sm">Special Issue</span>
+                <span class="tag-sm">Everyday Creativity</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citeCantonesePopCulture2026" data-bibtex="@article{wong_lam_2026_cantonese,
+  editor={Wong, Catherine and Lam, Charles},
+  title={Cantonese as Cultural Expression: Language, Identity, and Everyday Creativity in Hong Kong},
+  journal={Journal of Language and Pop Culture},
+  year={2026},
+  note={Special Issue}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Wong, C., &amp; Lam, C. (Eds.). (2026). Cantonese as Cultural Expression: Language, Identity, and Everyday Creativity in Hong Kong [Special Issue]. Journal of Language and Pop Culture.">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla='Wong, Catherine, and Charles Lam, editors. "Cantonese as Cultural Expression: Language, Identity, and Everyday Creativity in Hong Kong." Special Issue of Journal of Language and Pop Culture, 2026.'>MLA</button>
+            </div>
+          </article>
+
+          <!-- 2. Edited Volume 2026 -->
+          <article class="pub-item" data-type="edited">
+            <div class="pub-year">2026</div>
+            <div class="pub-content">
+              <span class="pub-type">Edited Volume (Forthcoming)</span>
+              <h3 class="pub-title">Reimagining Hong Kong’s Cultural Identity</h3>
+              <div class="pub-venue">Routledge Hong Kong Research Series (ISBN: 978-1-041-16141-7)</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Cultural Identity</span>
+                <span class="tag-sm">Hong Kong Studies</span>
+                <span class="tag-sm">Edited Book</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citeRoutledge2026" data-bibtex="@book{wong_lam_2026_reimagining,
+  editor={Wong, Catherine and Lam, Charles},
+  title={Reimagining Hong Kong's Cultural Identity},
+  publisher={Routledge},
+  series={Routledge Hong Kong Research Series},
+  year={2026},
+  isbn={978-1-041-16141-7}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Wong, C., &amp; Lam, C. (Eds.). (2026). Reimagining Hong Kong's Cultural Identity. Routledge.">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla="Wong, Catherine, and Charles Lam, editors. Reimagining Hong Kong's Cultural Identity. Routledge, 2026.">MLA</button>
+            </div>
+          </article>
+
+          <!-- 2. Edited Volume 2026 -->
+          <article class="pub-item" data-type="edited">
+            <div class="pub-year">2026</div>
+            <div class="pub-content">
+              <span class="pub-type">Edited Volume (Forthcoming)</span>
+              <h3 class="pub-title">Big and Small Data in English Historical Linguistics</h3>
+              <div class="pub-venue">John Benjamins / CILT Publishing</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Historical Linguistics</span>
+                <span class="tag-sm">Corpus Data</span>
+                <span class="tag-sm">Edited Volume</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citeJohnBenjamins" data-bibtex="@book{wallis_whittle_wong_fitzmaurice_2026a,
+  editor={Wallis, C. and Whittle, S. and Wong, Catherine and Fitzmaurice, Susan},
+  title={Big and Small Data in English Historical Linguistics},
+  publisher={John Benjamins},
+  series={Current Issues in Linguistic Theory (CILT)},
+  year={2026}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Wallis, C., Whittle, S., Wong, C., &amp; Fitzmaurice, S. (Eds.). (2026). Big and Small Data in English Historical Linguistics. John Benjamins.">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla="Wallis, C., et al., editors. Big and Small Data in English Historical Linguistics. John Benjamins, 2026.">MLA</button>
+            </div>
+          </article>
+
+          <!-- 2b. Edited Volume 2026 -->
+          <article class="pub-item" data-type="edited">
+            <div class="pub-year">2026</div>
+            <div class="pub-content">
+              <span class="pub-type">Edited Volume (Forthcoming)</span>
+              <h3 class="pub-title">Revisiting Change in English Historical Linguistics: Evidence, Analysis, and Explanation</h3>
+              <div class="pub-venue">John Benjamins / CILT Publishing</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Historical Linguistics</span>
+                <span class="tag-sm">Corpus Data</span>
+                <span class="tag-sm">Edited Volume</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citeJohnBenjamins" data-bibtex="@book{wallis_whittle_wong_fitzmaurice_2026b,
+  editor={Wallis, C. and Whittle, S. and Wong, Catherine and Fitzmaurice, Susan},
+  title={Revisiting Change in English Historical Linguistics: Evidence, Analysis, and Explanation},
+  publisher={John Benjamins},
+  series={Current Issues in Linguistic Theory (CILT)},
+  year={2026}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Wallis, C., Whittle, S., Wong, C., &amp; Fitzmaurice, S. (Eds.). (2026). Revisiting Change in English Historical Linguistics: Evidence, Analysis, and Explanation. John Benjamins.">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla="Wallis, C., et al., editors. Revisiting Change in English Historical Linguistics: Evidence, Analysis, and Explanation. John Benjamins, 2026.">MLA</button>
+            </div>
+          </article>
+
+          <!-- 3. Book Chapter 2026 -->
+          <article class="pub-item" data-type="chapter">
+            <div class="pub-year">2026</div>
+            <div class="pub-content">
+              <span class="pub-type">Book Chapter (Forthcoming)</span>
+              <h3 class="pub-title">Melodies in Migration: Navigating Cultural Identity through Cantopop Lyrics</h3>
+              <div class="pub-venue">In C. Wong &amp; C. Lam (eds.), <em>Reimagining Hong Kong’s Cultural Identity</em>,
+                Routledge</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Cantopop</span>
+                <span class="tag-sm">Diaspora</span>
+                <span class="tag-sm">Lyrics Analytics</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citeMelodies2026" data-bibtex="@incollection{wong2026melodies,
+  author={Wong, Catherine},
+  title={Melodies in Migration: Navigating Cultural Identity through Cantopop Lyrics},
+  booktitle={Reimagining Hong Kong's Cultural Identity},
+  editor={Wong, Catherine and Lam, Charles},
+  publisher={Routledge},
+  year={2026}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Wong, C. (2026). Melodies in Migration: Navigating Cultural Identity through Cantopop Lyrics. In C. Wong &amp; C. Lam (Eds.), Reimagining Hong Kong's Cultural Identity. Routledge.">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla='Wong, Catherine. "Melodies in Migration: Navigating Cultural Identity through Cantopop Lyrics." Reimagining Hong Kong&#39;s Cultural Identity, edited by Catherine Wong and Charles Lam, Routledge, 2026.'>MLA</button>
+            </div>
+          </article>
+
+          <!-- 4. Journal Article In Press -->
+          <article class="pub-item" data-type="journal">
+            <div class="pub-year">2025</div>
+            <div class="pub-content">
+              <span class="pub-type">Peer-Reviewed Journal Article (In Press)</span>
+              <h3 class="pub-title">Poetics of Time and Identity in Hong Kong Lyrics: A Digital Investigation</h3>
+              <div class="pub-venue">East Asian Journal of Popular Culture</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Digital Humanities</span>
+                <span class="tag-sm">Poetics</span>
+                <span class="tag-sm">Popular Culture</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citeEAJPC2025" data-bibtex="@article{wong_lam_poetics_2025,
+  author={Wong, Catherine and Lam, Charles},
+  title={Poetics of Time and Identity in Hong Kong Lyrics: a Digital Investigation},
+  journal={East Asian Journal of Popular Culture},
+  year={2025},
+  note={In press}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Wong, C., &amp; Lam, C. (2025). Poetics of Time and Identity in Hong Kong Lyrics: A Digital Investigation. East Asian Journal of Popular Culture. (In press).">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla='Wong, Catherine, and Charles Lam. "Poetics of Time and Identity in Hong Kong Lyrics: A Digital Investigation." East Asian Journal of Popular Culture, 2025.'>MLA</button>
+            </div>
+          </article>
+
+          <!-- 5. Journal Article In Press -->
+          <article class="pub-item" data-type="journal">
+            <div class="pub-year">2025</div>
+            <div class="pub-content">
+              <span class="pub-type">Peer-Reviewed Journal Article (In Press)</span>
+              <h3 class="pub-title">Methods, Data, and Conceptual Change: Reflections from Two Quantitative Diachronic
+                Case Studies</h3>
+              <div class="pub-venue">Journal of Open Humanities Data</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Diachronic Linguistics</span>
+                <span class="tag-sm">Quantitative Methods</span>
+                <span class="tag-sm">Open Humanities Data</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citeJOHD2025" data-bibtex="@article{wong_phantat_fitzmaurice_2025,
+  author={Wong, Catherine and Phan-T{\^a}t, B&#7843;o and Fitzmaurice, Susan},
+  title={Methods, Data, and Conceptual Change: Reflections from Two Quantitative Diachronic Case Studies},
+  journal={Journal of Open Humanities Data},
+  year={2025},
+  note={In press}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Wong, C., Phan-Tất, B., &amp; Fitzmaurice, S. (2025). Methods, Data, and Conceptual Change: Reflections from Two Quantitative Diachronic Case Studies. Journal of Open Humanities Data. (In press).">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla='Wong, Catherine, Bảo Phan-Tất, and Susan Fitzmaurice. "Methods, Data, and Conceptual Change: Reflections from Two Quantitative Diachronic Case Studies." Journal of Open Humanities Data, 2025.'>MLA</button>
+            </div>
+          </article>
+
+          <!-- 6. Book Chapter 2024 -->
+          <article class="pub-item" data-type="chapter">
+            <div class="pub-year">2024</div>
+            <div class="pub-content">
+              <span class="pub-type">Book Chapter</span>
+              <h3 class="pub-title">Two Tales of a City: A Digital Investigation of Tat Ming Pair and Beyond in
+                Pre-Handover Hong Kong</h3>
+              <div class="pub-venue">In J.-F. Dupré (ed.), <em>The Politics of Language in Hong Kong</em>, Routledge
+              </div>
+              <div class="pub-tags">
+                <span class="tag-sm">Text Mining</span>
+                <span class="tag-sm">Pre-Handover HK</span>
+                <span class="tag-sm">Sociolinguistics</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citeRoutledge2024" data-bibtex="@incollection{wong_lam_2024_twotales,
+  author={Wong, Catherine and Lam, Charles},
+  title={Two Tales of a City: A Digital Investigation of Tat Ming Pair and Beyond in Pre-Handover Hong Kong},
+  booktitle={The Politics of Language in Hong Kong},
+  editor={Dupr{\'e}, Jean-Fran{\c{c}}ois},
+  publisher={Routledge},
+  year={2024}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Wong, C., &amp; Lam, C. (2024). Two Tales of a City: A Digital Investigation of Tat Ming Pair and Beyond in Pre-Handover Hong Kong. In J.-F. Dupré (Ed.), The Politics of Language in Hong Kong. Routledge.">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla='Wong, Catherine, and Charles Lam. "Two Tales of a City: A Digital Investigation of Tat Ming Pair and Beyond in Pre-Handover Hong Kong." The Politics of Language in Hong Kong, edited by Jean-François Dupré, Routledge, 2024.'>MLA</button>
+            </div>
+          </article>
+
+          <!-- 7. Journal Article 2024 -->
+          <article class="pub-item" data-type="journal">
+            <div class="pub-year">2024</div>
+            <div class="pub-content">
+              <span class="pub-type">Peer-Reviewed Journal Article</span>
+              <h3 class="pub-title">Bayesian Analysis of Joint Quantile Regression for Multi-Response Longitudinal Data
+              </h3>
+              <div class="pub-venue">Statistical Methods in Medical Research, Vol. 33, No. 7, pp. 1163–1184</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Bayesian Analysis</span>
+                <span class="tag-sm">Longitudinal Data</span>
+                <span class="tag-sm">Quantitative Methods</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citeSMMR2024" data-bibtex="@article{tian_tang_wong_tian_2024,
+  author={Tian, Y. Z. and Tang, M. L. and Wong, Catherine and Tian, M. Z.},
+  title={Bayesian analysis of joint quantile regression for multi-response longitudinal data},
+  journal={Statistical Methods in Medical Research},
+  volume={33},
+  number={7},
+  pages={1163--1184},
+  year={2024}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Tian, Y. Z., Tang, M. L., Wong, C., &amp; Tian, M. Z. (2024). Bayesian analysis of joint quantile regression for multi-response longitudinal data. Statistical Methods in Medical Research, 33(7), 1163–1184.">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla='Tian, Y. Z., et al. "Bayesian Analysis of Joint Quantile Regression for Multi-Response Longitudinal Data." Statistical Methods in Medical Research, vol. 33, no. 7, 2024, pp. 1163–1184.'>MLA</button>
+            </div>
+          </article>
+
+          <!-- 8. Journal Article 2021 -->
+          <article class="pub-item" data-type="journal">
+            <div class="pub-year">2021</div>
+            <div class="pub-content">
+              <span class="pub-type">Peer-Reviewed Journal Article</span>
+              <h3 class="pub-title">A Two-Stage Variational Jump Point Detection Algorithm for Real Estate Analysis</h3>
+              <div class="pub-venue">Land Use Policy, Vol. 111, Art. 105687</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Algorithms</span>
+                <span class="tag-sm">Spatial Data</span>
+                <span class="tag-sm">Applied Modeling</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citeLandUse2021" data-bibtex="@article{choy_yu_lee_lam_wong_2021,
+  author={Choy, S. K. and Yu, K. W. and Lee, T. C. and Lam, B. S. and Wong, C. Y.},
+  title={A two-stage variational jump point detection algorithm for real estate analysis},
+  journal={Land Use Policy},
+  volume={111},
+  pages={105687},
+  year={2021}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Choy, S. K., Yu, K. W., Lee, T. C., Lam, B. S., &amp; Wong, C. Y. (2021). A two-stage variational jump point detection algorithm for real estate analysis. Land Use Policy, 111, 105687.">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla='Choy, S. K., et al. "A Two-Stage Variational Jump Point Detection Algorithm for Real Estate Analysis." Land Use Policy, vol. 111, 2021, p. 105687.'>MLA</button>
+            </div>
+          </article>
+
+          <!-- 9. Journal Article 2020 -->
+          <article class="pub-item" data-type="journal">
+            <div class="pub-year">2020</div>
+            <div class="pub-content">
+              <span class="pub-type">Peer-Reviewed Journal Article</span>
+              <h3 class="pub-title">Accent in Digital Humanities and Language Studies: The Case in Hong Kong</h3>
+              <div class="pub-venue">3L: Language, Linguistics, Literature, Vol. 26, No. 1</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Digital Humanities</span>
+                <span class="tag-sm">Sociolinguistics</span>
+                <span class="tag-sm">Hong Kong</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="cite3L2020" data-bibtex="@article{lam_wong_2020_accent,
+  author={Lam, Charles and Wong, Catherine},
+  title={Accent in Digital Humanities and Language Studies: The Case in Hong Kong},
+  journal={3L: Language, Linguistics, Literature},
+  volume={26},
+  number={1},
+  year={2020}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Lam, C., &amp; Wong, C. (2020). Accent in Digital Humanities and Language Studies: The Case in Hong Kong. 3L: Language, Linguistics, Literature, 26(1).">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla='Lam, Charles, and Catherine Wong. "Accent in Digital Humanities and Language Studies: The Case in Hong Kong." 3L: Language, Linguistics, Literature, vol. 26, no. 1, 2020.'>MLA</button>
+            </div>
+          </article>
+
+          <!-- 10. Book Chapter 2017 -->
+          <article class="pub-item" data-type="chapter">
+            <div class="pub-year">2017</div>
+            <div class="pub-content">
+              <span class="pub-type">Book Chapter</span>
+              <h3 class="pub-title">Aesthetics in Detective Fiction: A Case Study of Arthur Conan Doyle’s The Adventures
+                of Sherlock Holmes</h3>
+              <div class="pub-venue">In F. Cubukcu (ed.), <em>Aesthetic Studies in Education and Literature</em>, Peter
+                Lang (ISBN: 978-3-631-72306-7)</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Sherlock Holmes</span>
+                <span class="tag-sm">Detective Fiction</span>
+                <span class="tag-sm">Literary Aesthetics</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citePeterLang2017" data-bibtex="@incollection{wong2017aesthetics,
+  author={Wong, Catherine},
+  title={Aesthetics in Detective Fiction: A Case Study of Arthur Doyle Conan's The Adventures of Sherlock Holmes},
+  booktitle={Aesthetic Studies in Education and Literature},
+  editor={Cubukcu, Feryal},
+  publisher={Peter Lang},
+  year={2017},
+  isbn={978-3-631-72306-7}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Wong, C. (2017). Aesthetics in Detective Fiction: A Case Study of Arthur Conan Doyle’s The Adventures of Sherlock Holmes. In F. Cubukcu (Ed.), Aesthetic Studies in Education and Literature. Peter Lang.">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla='Wong, Catherine. "Aesthetics in Detective Fiction: A Case Study of Arthur Conan Doyle’s The Adventures of Sherlock Holmes." Aesthetic Studies in Education and Literature, edited by Feryal Cubukcu, Peter Lang, 2017.'>MLA</button>
+            </div>
+          </article>
+
+          <!-- 11. Book Chapter 2015 -->
+          <article class="pub-item" data-type="chapter">
+            <div class="pub-year">2015</div>
+            <div class="pub-content">
+              <span class="pub-type">Book Chapter</span>
+              <h3 class="pub-title">A Cognitive Poetics in the Analysis of Narrative of Kazuo Ishiguro’s A Pale View of
+                Hills</h3>
+              <div class="pub-venue">In F. Cubukcu &amp; L. Harputlu (eds.), <em>Literary and Linguistic Theories in
+                  Reading</em>, Peter Lang</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Cognitive Poetics</span>
+                <span class="tag-sm">Kazuo Ishiguro</span>
+                <span class="tag-sm">Narrative Theory</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citePeterLang2015" data-bibtex="@incollection{wong2015cognitive,
+  author={Wong, Catherine},
+  title={A Cognitive Poetics in the analysis of narrative of Kazuo Ishiguro's A Pale View of Hills},
+  booktitle={Literary and Linguistic Theories in Reading},
+  editor={Cubukcu, Feryal and Harputlu, Layla},
+  publisher={Peter Lang},
+  year={2015}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Wong, C. (2015). A Cognitive Poetics in the Analysis of Narrative of Kazuo Ishiguro’s A Pale View of Hills. In F. Cubukcu &amp; L. Harputlu (Eds.), Literary and Linguistic Theories in Reading. Peter Lang.">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla='Wong, Catherine. "A Cognitive Poetics in the Analysis of Narrative of Kazuo Ishiguro’s A Pale View of Hills." Literary and Linguistic Theories in Reading, edited by Feryal Cubukcu and Layla Harputlu, Peter Lang, 2015.'>MLA</button>
+            </div>
+          </article>
+
+          <!-- 12. Journal Article 2014 -->
+          <article class="pub-item" data-type="journal">
+            <div class="pub-year">2014</div>
+            <div class="pub-content">
+              <span class="pub-type">Peer-Reviewed Journal Article</span>
+              <h3 class="pub-title">Collapse of Narrative: A Study of Narrative Distance in the Confessional Narrative
+                in Kazuo Ishiguro's Work</h3>
+              <div class="pub-venue">Procedia - Social and Behavioral Sciences, Vol. 158, pp. 57–64</div>
+              <div class="pub-tags">
+                <span class="tag-sm">Narrative Distance</span>
+                <span class="tag-sm">Kazuo Ishiguro</span>
+                <span class="tag-sm">Confessional Prose</span>
+              </div>
+            </div>
+            <div class="pub-actions">
+              <button class="btn btn-outline btn-sm cite-btn" id="citeProcedia2014" data-bibtex="@article{wong2014collapse,
+  author={Wong, Catherine},
+  title={Collapse of Narrative: a study of narrative distance in the confessional narrative in Kazuo Ishiguro's work},
+  journal={Procedia - Social and Behavioral Sciences},
+  volume={158},
+  pages={57--64},
+  year={2014}
+}">BibTeX</button>
+              <button class="btn btn-outline btn-sm cite-apa-btn" onclick="copyCitation(this, 'apa')"
+                data-apa="Wong, C. (2014). Collapse of Narrative: A Study of Narrative Distance in the Confessional Narrative in Kazuo Ishiguro's Work. Procedia - Social and Behavioral Sciences, 158, 57–64.">APA</button>
+              <button class="btn btn-outline btn-sm cite-mla-btn" onclick="copyCitation(this, 'mla')"
+                data-mla='Wong, Catherine. "Collapse of Narrative: A Study of Narrative Distance in the Confessional Narrative in Kazuo Ishiguro&#39;s Work." Procedia - Social and Behavioral Sciences, vol. 158, 2014, pp. 57–64.'>MLA</button>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Presentations Section -->
+    <section class="section section-alt" id="presentations">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Conference Talks &amp; Keynotes</span>
+          <h2 class="section-title">Presentations</h2>
+        </div>
+
+        <div class="pres-layout">
+
+          <!-- Left Half: Cards (Half-width) -->
+          <div class="pres-grid" id="presList">
+
+            <!-- 1. Presentation 2026 - QDLCA 2026 -->
+            <article class="pres-item active"
+              data-embed="https://docs.google.com/presentation/d/11eTEn1V5-fzTsvDEKdwY3lvyoBQi4TUxzAjk27hliIc/embed?start=false&loop=false&delayms=3000"
+              data-url="https://docs.google.com/presentation/d/11eTEn1V5-fzTsvDEKdwY3lvyoBQi4TUxzAjk27hliIc/edit?usp=sharing"
+              data-title="Liberty vs Freedom: A quantitative story of lexical stability and conceptual complexity">
+              <div class="pres-year">2026</div>
+              <div class="pres-content">
+                <h3 class="pres-title">Liberty vs Freedom: A quantitative story of lexical stability and conceptual
+                  complexity</h3>
+                <div class="pres-event">QDLCA 2026 &middot; King's College London</div>
+                <div class="pub-tags">
+                  <span class="tag-sm">Early Modern English</span>
+                  <span class="tag-sm">Lexical Stability</span>
+                  <span class="tag-sm">Quantitative Stylistics</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 2. Presentation 2025 - Sinophone Research Forum -->
+            <article class="pres-item"
+              data-embed="https://docs.google.com/presentation/d/1CQ7d0PmZzZOw6g86oEyxRz4VT4pUwP626e-vPxOMTLk/embed?start=false&loop=false&delayms=3000"
+              data-url="https://docs.google.com/presentation/d/1CQ7d0PmZzZOw6g86oEyxRz4VT4pUwP626e-vPxOMTLk/edit?usp=sharing"
+              data-title="Forbidden Love &amp; Fluid Identities: Computational &amp; Stylistics Approaches to Cantopop in 1980s Hong Kong">
+              <div class="pres-year">2025</div>
+              <div class="pres-content">
+                <h3 class="pres-title">Forbidden Love &amp; Fluid Identities: Computational &amp; Stylistics Approaches
+                  to Cantopop in 1980s Hong Kong</h3>
+                <div class="pres-event">Island Voices on the Move: Sinophone Research Forum &middot; University of Leeds</div>
+                <div class="pub-tags">
+                  <span class="tag-sm">Cantopop</span>
+                  <span class="tag-sm">Computational Stylistics</span>
+                  <span class="tag-sm">Sinophone Studies</span>
+                  <span class="tag-sm">Fluid Identities</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 3. Presentation 2024 - DHC 2024 -->
+            <article class="pres-item"
+              data-embed="https://docs.google.com/presentation/d/1vzFth4ybAzFl8zCw10ToBZV8H6VMPYtmAD84-fUs3lo/embed?start=false&loop=false&delayms=3000"
+              data-url="https://docs.google.com/presentation/d/1vzFth4ybAzFl8zCw10ToBZV8H6VMPYtmAD84-fUs3lo/edit?usp=sharing"
+              data-title="Two Tales of a City: A Digital Investigation of Cantopop Lyrics in the Pre-handover Hong Kong">
+              <div class="pres-year">2024</div>
+              <div class="pres-content">
+                <h3 class="pres-title">Two Tales of a City: A Digital Investigation of Cantopop Lyrics in the
+                  Pre-handover Hong Kong</h3>
+                <div class="pres-event">Digital Humanities Congress (DHC 2024) &middot; University of Sheffield</div>
+                <div class="pub-tags">
+                  <span class="tag-sm">Digital Humanities</span>
+                  <span class="tag-sm">Cantopop Lyrics</span>
+                  <span class="tag-sm">Pre-Handover HK</span>
+                  <span class="tag-sm">Text Mining</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 4. Presentation 2024 - CADS 2024 -->
+            <article class="pres-item" data-embed="https://slides.com/catherinewong-1/cads/embed"
+              data-url="https://slides.com/catherinewong-1/cads"
+              data-title="Visualising Conceptual Shift: Between the Religious and the Secular in Early Modern English">
+              <div class="pres-year">2024</div>
+              <div class="pres-content">
+                <h3 class="pres-title">Visualising Conceptual Shift: Between the Religious and the Secular in Early
+                  Modern English</h3>
+                <div class="pres-event">The 7th Corpora &amp; Discourse International Conference (CADS 2024) &middot;
+                  Universität Innsbruck, Austria</div>
+                <div class="pub-tags">
+                  <span class="tag-sm">Corpora &amp; Discourse</span>
+                  <span class="tag-sm">Conceptual Shift</span>
+                  <span class="tag-sm">Early Modern English</span>
+                  <span class="tag-sm">Visualisation</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 5. Presentation 2024 - IVACS 2024 -->
+            <article class="pres-item"
+              data-embed="https://docs.google.com/presentation/d/13mukmRsIQr-C7XCE905R1OmY5A-3BJCSrsGLcud6QHc/embed?start=false&loop=false&delayms=3000"
+              data-url="https://docs.google.com/presentation/d/13mukmRsIQr-C7XCE905R1OmY5A-3BJCSrsGLcud6QHc/edit?usp=sharing"
+              data-title="Sherlock Holmes in the Computer">
+              <div class="pres-year">2024</div>
+              <div class="pres-content">
+                <h3 class="pres-title">Sherlock Holmes in the Computer</h3>
+                <div class="pres-event">IVACS 2024 &middot; University of Cambridge</div>
+                <div class="pub-tags">
+                  <span class="tag-sm">Sherlock Holmes</span>
+                  <span class="tag-sm">Corpus Stylistics</span>
+                  <span class="tag-sm">Computational Humanities</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 6. Presentation 2024 - Formulaic Patterns -->
+            <article class="pres-item"
+              data-embed="https://docs.google.com/presentation/d/1lm0Wv-tVH-pajL72jh5ZDQZUkSdnkR-bDiFgUnHD_oU/embed?start=false&loop=false&delayms=3000"
+              data-url="https://docs.google.com/presentation/d/1lm0Wv-tVH-pajL72jh5ZDQZUkSdnkR-bDiFgUnHD_oU/edit?usp=sharing"
+              data-title="Tracing Formulaic Patterns and Language Change in Early Modern English: A Quantitative and Computational Approach">
+              <div class="pres-year">2024</div>
+              <div class="pres-content">
+                <h3 class="pres-title">Tracing Formulaic Patterns and Language Change in Early Modern English: A
+                  Quantitative and Computational Approach</h3>
+                <div class="pres-event">Formulaic Language in Historical Linguistics &middot; University of Helsinki</div>
+                <div class="pub-tags">
+                  <span class="tag-sm">Formulaic Language</span>
+                  <span class="tag-sm">Diachronic Linguistics</span>
+                  <span class="tag-sm">Early Modern English</span>
+                  <span class="tag-sm">Computational Methods</span>
+                </div>
+              </div>
+            </article>
+
+            <!-- 7. Presentation 2023 - University of Brest -->
+            <article class="pres-item"
+              data-embed="https://docs.google.com/presentation/d/19j_6r2M5H_8-wJg4dcv3-lmfpplbI7EY-ivV-U7c7ww/embed?start=false&loop=false&delayms=3000"
+              data-url="https://docs.google.com/presentation/d/19j_6r2M5H_8-wJg4dcv3-lmfpplbI7EY-ivV-U7c7ww/edit?usp=sharing"
+              data-title="Discursive Identity Construction through Democratisation of Creativity and Production in Hong Kong Pop Culture">
+              <div class="pres-year">2023</div>
+              <div class="pres-content">
+                <h3 class="pres-title">Discursive Identity Construction through Democratisation of Creativity and
+                  Production in Hong Kong Pop Culture</h3>
+                <div class="pres-event">Identities and Identity Construction in Discourse and Language &middot;
+                  University of Brest</div>
+                <div class="pub-tags">
+                  <span class="tag-sm">Discourse Analysis</span>
+                  <span class="tag-sm">Hong Kong Pop Culture</span>
+                  <span class="tag-sm">Identity Construction</span>
+                  <span class="tag-sm">Democratisation</span>
+                </div>
+              </div>
+            </article>
+
+          </div>
+
+          <!-- Right Half: Embedded Slide Preview Frame -->
+          <div class="pres-frame-wrap" id="presFrameWrap">
+            <div class="pres-frame-header">
+              <div class="pres-frame-title-wrap">
+                <span class="pres-frame-label">Slide Interactive Viewer</span>
+                <span class="pres-frame-active-title" id="presFrameTitle">Liberty vs Freedom: A quantitative story of
+                  lexical stability and conceptual complexity</span>
+              </div>
+              <a href="https://docs.google.com/presentation/d/11eTEn1V5-fzTsvDEKdwY3lvyoBQi4TUxzAjk27hliIc/edit?usp=sharing"
+                target="_blank" rel="noopener" class="btn btn-primary btn-sm" id="presFrameExternalBtn">
+                Full Screen &rarr;
+              </a>
+            </div>
+            <div class="pres-frame-body">
+              <iframe id="presIframe"
+                src="https://docs.google.com/presentation/d/11eTEn1V5-fzTsvDEKdwY3lvyoBQi4TUxzAjk27hliIc/embed?start=false&loop=false&delayms=3000"
+                frameborder="0" width="100%" height="100%" allowfullscreen="true" mozallowfullscreen="true"
+                webkitallowfullscreen="true"></iframe>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Digital Humanities Tools Section -->
+    <section class="section section-dark" id="tools">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Digital Humanities Tools</span>
+          <h2 class="section-title">Computing Humanities with Criticality</h2>
+        </div>
+
+        <div class="tools-list" style="display: flex; flex-direction: column; gap: 2rem;">
+
+          <!-- Tool 1: DramaScope 1.0 -->
+          <div class="tool-card-box"
+            style="background-color: var(--bg-charcoal); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 2.2rem; box-shadow: var(--shadow-md);">
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: start;">
+
+              <!-- Left Column: Tool Info & Action Button -->
+              <div>
+                <h3 style="font-size: 1.8rem; color: #ffffff; margin-bottom: 0.8rem;">DramaScope 1.0</h3>
+                <p style="color: #d1d1d6; font-size: 0.98rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                  DramaScope is a web-based research platform for investigating language patterns and language change in Early Modern English. Integrating lexical, semantic, and discursive analyses within a single interactive environment, it enables researchers to explore language from individual words to evolving conceptual structures. Version 1.0 is demonstrated using a Shakespeare corpus and is designed to support additional Early Modern corpora in future releases.
+                </p>
+                <a href="https://dramascope.replit.app/dashboard" target="_blank" rel="noopener"
+                  class="btn btn-primary btn-sm">
+                  Visit &rarr;
+                </a>
+              </div>
+
+              <!-- Right Column: Tool Features (Always Visible, Sans-Serif, No Emojis/Tech Stack) -->
+              <div
+                style="background: rgba(0, 0, 0, 0.25); padding: 1.4rem; border-radius: var(--radius-sm); border: 1px solid var(--border-dark); border-left: 3px solid var(--accent-yellow);">
+                <h4
+                  style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; color: var(--accent-yellow); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.9rem;">
+                  Features include:</h4>
+                <ul
+                  style="list-style-type: disc; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: #d1d1d6; font-family: var(--font-sans);">
+                  <li>Lexical analysis (KWIC &amp; collocates)</li>
+                  <li>Expression &amp; phraseology analysis</li>
+                  <li>Concept modelling</li>
+                  <li>Diachronic language change</li>
+                  <li>Reproducible analytical workflows</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Tool 2: Text Visualiser -->
+          <div class="tool-card-box"
+            style="background-color: var(--bg-charcoal); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 2.2rem; box-shadow: var(--shadow-md);">
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: start;">
+
+              <!-- Left Column: Tool Info & Action Button -->
+              <div>
+                <h3 style="font-size: 1.8rem; color: #ffffff; margin-bottom: 0.8rem;">Text Visualiser</h3>
+                <p style="color: #d1d1d6; font-size: 0.98rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                  A real-time computational text analysis workbench calculating Type-Token Ratios (lexical richness),
+                  archaic vocabulary density indices, and average syllable distributions.<br>
+                  Built with live HTML5 Canvas frequency charts for English prose, speech, and poetry.
+                </p>
+                <a href="visualiser.html" class="btn btn-primary btn-sm">
+                  Visit &rarr;
+                </a>
+              </div>
+
+              <!-- Right Column: Tool Features (Always Visible, Sans-Serif, No Emojis/Tech Stack) -->
+              <div
+                style="background: rgba(0, 0, 0, 0.25); padding: 1.4rem; border-radius: var(--radius-sm); border: 1px solid var(--border-dark); border-left: 3px solid var(--accent-yellow);">
+                <h4
+                  style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; color: var(--accent-yellow); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.9rem;">
+                  Features include:</h4>
+                <ul
+                  style="list-style-type: disc; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: #d1d1d6; font-family: var(--font-sans);">
+                  <li>Live Type-Token Ratio (TTR) lexical richness scoring</li>
+                  <li>Early Modern orthographic archaism dictionary scanner</li>
+                  <li>Interactive canvas bar charts with custom text support</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Tool 3: Sherlock Holmes's Door -->
+          <div class="tool-card-box"
+            style="background-color: var(--bg-charcoal); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 2.2rem; box-shadow: var(--shadow-md);">
+            <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: start;">
+
+              <!-- Left Column: Tool Info & Action Button -->
+              <div>
+                <h3 style="font-size: 1.8rem; color: #ffffff; margin-bottom: 0.8rem;">Sherlock Holmes's Door</h3>
+                <p style="color: #d1d1d6; font-size: 0.98rem; line-height: 1.6; margin-bottom: 1.5rem;">
+                  Sherlock Holmes's Door is an interactive computational narratology teaching suite exploring how language, narrative structure, and point of view create suspense in Sherlock Holmes. Drawing on corpus linguistics and quantitative discourse analysis, it enables users to investigate the narrative mechanisms underlying detective fiction through interactive visualisations and guided activities.
+                </p>
+                <a href="sherlock_door.html" class="btn btn-primary btn-sm">
+                  Visit &rarr;
+                </a>
+              </div>
+
+              <!-- Right Column: Tool Features (Always Visible, Sans-Serif, No Emojis/Tech Stack) -->
+              <div
+                style="background: rgba(0, 0, 0, 0.25); padding: 1.4rem; border-radius: var(--radius-sm); border: 1px solid var(--border-dark); border-left: 3px solid var(--accent-yellow);">
+                <h4
+                  style="font-family: var(--font-sans); font-size: 0.85rem; font-weight: 700; color: var(--accent-yellow); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.9rem;">
+                  Features include:</h4>
+                <ul
+                  style="list-style-type: disc; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 8px; font-size: 0.88rem; color: #d1d1d6; font-family: var(--font-sans);">
+                  <li>Corpus exploration</li>
+                  <li>Narrative structure analysis</li> 
+                  <li>TCU alignment</li>
+                  <li>POV &amp; suspense dynamics</li>
+                  <li>Interactive learning</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact & CV Section -->
+    <section class="section" id="contact">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Get in Touch</span>
+          <h2 class="section-title">Contact &amp; Office Hours</h2>
+        </div>
+
+        <div class="contact-wrap">
+          <div class="contact-info" style="width: 100%;">
+
+            <ul class="contact-info-list"
+              style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin-top: 2rem;">
+              <li class="contact-item"
+                style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <div class="contact-icon">&#9993;</div>
+                <div>
+                  <div class="contact-text-label">Email</div>
+                  <div class="contact-text-val">catherine.wong@sheffield.ac.uk</div>
+                </div>
+              </li>
+
+              <li class="contact-item"
+                style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <div class="contact-icon">&#127963;</div>
+                <div>
+                  <div class="contact-text-label">Office</div>
+                  <div class="contact-text-val">1/F, 9 Mappin
+                  </div>
+                </div>
+              </li>
+
+              <li class="contact-item"
+                style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <div class="contact-icon">&#127963;</div>
+                <div>
+                  <div class="contact-text-label">Office Hours</div>
+                  <div class="contact-text-val">Tuesdays &amp; Thursdays 14:00 – 15:00
+                  </div>
+                </div>
+              </li>
+
+              <li class="contact-item"
+                style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+                <div class="contact-icon">&#128196;</div>
+                <div>
+                  <div class="contact-text-label">Academic CV</div>
+                  <div class="contact-text-val" style="margin-top:6px;">
+                    <a href="#contact" onclick="alert('Catherine Wong CV PDF Download requested.'); return false;"
+                      class="btn btn-primary btn-sm" id="btnDownloadCV">
+                      Download Full CV (PDF)
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- BibTeX Citation Modal -->
+  <div class="modal-backdrop" id="bibtexModal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 style="font-size:1.2rem;">BibTeX Citation</h3>
+        <button class="modal-close" id="modalClose" aria-label="Close modal">&times;</button>
+      </div>
+      <div class="bibtex-code" id="bibtexCode">@book{wong2025, ...}</div>
+      <button class="btn btn-primary" id="copyBibtexBtn">Copy BibTeX to Clipboard</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-copy">
+        &copy; 2026 Catherine Wong. All Rights Reserved. Scholar of Digital Humanities &amp; Early Modern English
+        (UK).
+      </div>
+      <ul class="footer-links">
+        <li><a href="#hero">Back to Top &uarr;</a></li>
+        <li><a href="https://orcid.org" target="_blank" rel="noopener">ORCID</a></li>
+        <li><a href="https://scholar.google.com" target="_blank" rel="noopener">Google Scholar</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="toast-notification">Citation Copied!</div>
+
+  <!-- Scripts -->
+  <script src="js/stylistics.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

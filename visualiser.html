@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Early Modern Text Stylistics Visualiser | Dr Catherine Wong</title>
+  <meta name="description" content="Interactive Digital Humanities computational stylistics tool for analysing Early Modern English literature, lexical richness, archaism density, and vocabulary frequency distributions.">
+  <meta name="author" content="Dr Catherine Wong">
+  
+  <!-- Google Fonts: Playfair Display (Serif), Inter (Sans), Fira Code (Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand" id="navBrand">
+        <span class="nav-brand-title">Dr Catherine Wong</span>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html#about" class="nav-link" id="linkAbout">About</a></li>
+          <li><a href="index.html#publications" class="nav-link" id="linkPublications">Publications</a></li>
+          <li><a href="index.html#tools" class="nav-link" id="linkTools">Tools</a></li>
+          <li><a href="index.html#teaching" class="nav-link" id="linkTeaching">Teaching</a></li>
+          <li><a href="index.html#contact" class="nav-link" id="linkContact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Tool Header Banner -->
+    <section class="hero" style="padding-top: 130px; padding-bottom: 50px; background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div style="max-width: 800px;">
+          <a href="index.html#tools" class="link-btn" style="margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted);">&larr; Return to Academic Profile</a>
+          <div style="margin-bottom: 1rem;">
+            <span class="badge-yellow">Interactive Digital Humanities Suite</span>
+          </div>
+          <h1 style="font-size: 2.8rem; margin-bottom: 1rem;">Early Modern Text Stylistics Visualiser</h1>
+          <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.6;">
+            A real-time computational text analysis workbench designed by Dr Catherine Wong for analysing 16th and 17th-century English literary corpora, historical speech cadence, orthographic archaism density, and relative word frequency distributions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Visualiser Interactive Workspace -->
+    <section class="section section-dark" id="visualizer" style="padding: 4rem 0;">
+      <div class="container">
+        <div class="visualizer-card">
+          <div class="viz-controls" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;">
+              <span class="viz-label" style="margin-bottom: 0;">Corpus Presets:</span>
+              <div class="viz-presets">
+                <button class="preset-btn active" data-preset="shakespeare" id="presetShakespeare">Shakespeare (Sonnet 18)</button>
+                <button class="preset-btn" data-preset="elizabeth" id="presetElizabeth">Elizabeth I (Tilbury 1588)</button>
+                <button class="preset-btn" data-preset="donne" id="presetDonne">John Donne (Devotions 1624)</button>
+                <button class="preset-btn" data-preset="marlowe" id="presetMarlowe">Marlowe (Faustus 1604)</button>
+              </div>
+            </div>
+
+            <!-- Stop Words Toggle Checkbox -->
+            <label style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.88rem; color: #d1d1d6; cursor: pointer; user-select: none; background: rgba(255,255,255,0.05); padding: 6px 14px; border-radius: var(--radius-sm); border: 1px solid var(--border-dark);">
+              <input type="checkbox" id="toggleStopwords" style="accent-color: var(--accent-yellow); width: 16px; height: 16px; cursor: pointer;">
+              <span>Include Stop Words</span>
+            </label>
+          </div>
+
+          <div class="viz-body">
+            <div class="viz-input-wrap">
+              <label class="viz-label" for="vizTextarea">
+                <span>Input Text Passage (Editable)</span>
+                <span>Early Modern English</span>
+              </label>
+              <textarea id="vizTextarea" class="viz-textarea" style="height: 280px;" placeholder="Paste or type Early Modern English text here..."></textarea>
+            </div>
+
+            <div class="viz-results">
+              <div class="metric-grid">
+                <div class="metric-card">
+                  <div class="metric-val" id="metricWordCount">0</div>
+                  <div class="metric-name">Total Word Count</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-val" id="metricTTR">0%</div>
+                  <div class="metric-name">Type-Token Ratio (Lexical Richness)</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-val" id="metricArchaic">0%</div>
+                  <div class="metric-name">Archaism Density Index</div>
+                </div>
+                <div class="metric-card">
+                  <div class="metric-val" id="metricSyllable">0</div>
+                  <div class="metric-name">Avg Syllables / Word</div>
+                </div>
+              </div>
+
+              <div class="chart-box">
+                <div class="chart-title">
+                  <span>Top Vocabulary Frequency Distribution</span>
+                  <span class="badge-yellow" style="font-size:0.7rem; padding: 2px 6px;">Live Canvas</span>
+                </div>
+                <canvas id="chartCanvas"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Methodology Notes -->
+    <section class="section" style="padding: 4rem 0;">
+      <div class="container">
+        <div style="max-width: 800px;">
+          <h2 style="font-size: 1.8rem; margin-bottom: 1.2rem;">Methodological Overview</h2>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem;">
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary);">Type-Token Ratio (TTR)</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                Calculates the proportion of unique vocabulary tokens relative to the total word count. High TTR scores indicate rich lexical variety, typical of Renaissance verse and formal rhetoric.
+              </p>
+            </div>
+
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
+              <h3 style="font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary);">Archaism Density</h3>
+              <p style="font-size: 0.9rem; color: var(--text-secondary);">
+                Cross-references tokens against Dr Wong's Early Modern English historical lexicon dictionary (containing archaic pronouns, verbal inflections, and early printing orthographic markers).
+              </p>
+            </div>
+          </div>
+
+          <div style="margin-top: 2.5rem;">
+            <a href="index.html#publications" class="btn btn-charcoal">Read Related Publications &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-copy">
+        &copy; 2026 Dr Catherine Wong. All Rights Reserved. Scholar of Digital Humanities &amp; Early Modern English (UK).
+      </div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#publications">Publications</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/stylistics.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

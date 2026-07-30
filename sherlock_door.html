@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sherlock Holmes's Door | Interactive Narrative Stylometry | Catherine Wong</title>
+  <meta name="description"
+    content="Interactive Digital Humanities teaching tool by Dr Catherine Wong exploring narrative boundaries, 2-gram clusters, Turn Construction Units (TCUs), and POV dynamics in Sherlock Holmes.">
+  <meta name="author" content="Dr Catherine Wong">
+
+  <!-- Google Fonts: Playfair Display (Serif), Inter (Sans), Fira Code (Mono) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    .story-tab-btn {
+      padding: 0.5rem 1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid var(--border-dark);
+      background: var(--bg-charcoal);
+      color: #a1a1aa;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .story-tab-btn:hover {
+      border-color: var(--accent-yellow);
+      color: #ffffff;
+    }
+
+    .story-tab-btn.active {
+      background: var(--accent-yellow);
+      color: var(--bg-primary);
+      border-color: var(--accent-yellow);
+    }
+
+    .quiz-option {
+      width: 100%;
+      text-align: left;
+      padding: 1rem 1.2rem;
+      background: var(--bg-charcoal);
+      border: 1px solid var(--border-dark);
+      border-radius: var(--radius-sm);
+      color: #d1d1d6;
+      font-size: 0.92rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 0.8rem;
+    }
+
+    .quiz-option:hover {
+      border-color: var(--accent-yellow);
+      background: rgba(255, 208, 0, 0.05);
+    }
+
+    .quiz-option.selected-correct {
+      border-color: #22c55e;
+      background: rgba(34, 197, 94, 0.15);
+      color: #ffffff;
+      font-weight: 600;
+    }
+
+    .quiz-option.selected-wrong {
+      border-color: #ef4444;
+      background: rgba(239, 68, 68, 0.15);
+      color: #ffffff;
+    }
+
+    .cluster-row:hover {
+      background: rgba(255, 208, 0, 0.09);
+    }
+
+    .highlight-row {
+      background: rgba(255, 208, 0, 0.15);
+    }
+
+    .compare-btn {
+      padding: 0.6rem 1.2rem;
+      font-size: 0.85rem;
+      font-weight: 700;
+      background: var(--bg-charcoal);
+      color: var(--accent-yellow);
+      border: 1px solid var(--accent-yellow);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .compare-btn:hover {
+      background: var(--accent-yellow);
+      color: var(--bg-primary);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <header class="navbar" id="navbar">
+    <div class="container">
+      <a href="index.html" class="nav-brand" id="navBrand">
+        <span class="nav-brand-title">Catherine Wong</span>
+      </a>
+
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav aria-label="Main Navigation">
+        <ul class="nav-links" id="navLinks">
+          <li><a href="index.html#about" class="nav-link" id="linkAbout">About</a></li>
+          <li><a href="index.html#publications" class="nav-link" id="linkPublications">Publications</a></li>
+          <li><a href="index.html#tools" class="nav-link" id="linkTools">Tools</a></li>
+          <li><a href="index.html#teaching" class="nav-link" id="linkTeaching">Teaching</a></li>
+          <li><a href="index.html#contact" class="nav-link" id="linkContact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Tool Header Banner -->
+    <section class="hero"
+      style="padding-top: 130px; padding-bottom: 50px; background-color: var(--bg-secondary); border-bottom: 1px solid var(--border-color);">
+      <div class="container">
+        <div style="max-width: 850px;">
+          <a href="index.html#tools" class="link-btn"
+            style="margin-bottom: 1rem; display: inline-flex; align-items: center; gap: 6px; color: var(--text-muted);">&larr;
+            Return to Academic Profile</a>
+          <div style="margin-bottom: 1rem;">
+            <span class="badge-yellow">Interactive DH Teaching Suite</span>
+          </div>
+          <h1 style="font-size: 2.8rem; margin-bottom: 1rem;">Sherlock Holmes's Door</h1>
+          <p style="font-size: 1.15rem; color: var(--text-secondary); line-height: 1.6;">
+            An interactive computational narratology explorer based on Catherine Wong's IVACS 2024 Cambridge paper
+            'Sherlock Holmes in the Computer'. Discover how lexical patterns, Turn Construction Units (TCUs), and point-of-view switching reveal the narrative mechanisms underlying suspense and enclosure in detective fiction.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 1: The 'The + Noun' Collocation Cluster Explorer -->
+    <section class="section" style="padding: 4rem 0;">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Corpus Feature Extraction</span>
+          <h2 class="section-title">1. Most Frequent Words After 'the'</h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start;">
+          <div>
+            <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              Across 10 short stories from <em>The Adventures of Sherlock Holmes</em> (85,979 tokens, 2,094 TCUs), the
+              word <em>the</em> is the most frequent word in the dataset (occurring 4,657 times).
+            </p>
+            <p style="color: var(--text-secondary); font-size: 1rem; line-height: 1.6; margin-bottom: 1.5rem;">
+              Examining lexical patterns following the reveals that 'the door' is the most frequent noun phrase (66 times), surpassing 'the matter' (65) and 'the room' (46).
+            </p>
+
+            <div
+              style="background: var(--bg-charcoal); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-dark); border-left: 4px solid var(--accent-yellow);">
+              <h4 style="font-size: 1rem; margin-bottom: 0.5rem; color: #ffffff;">Why 'The Door'?</h4>
+              <p style="font-size: 0.9rem; color: var(--text-secondary); line-height: 1.5; margin-bottom: 1rem;">
+                Hypothesise why <em>'the door'</em> ranks as the most frequent noun collocation following <em>'the'</em>
+                before revealing the expert narratological analysis:
+              </p>
+
+              <div style="display: flex; gap: 8px; margin-bottom: 0.8rem;">
+                <input type="text" id="studentHypothesisInput"
+                  placeholder="Type your thought here (e.g. threshold of mystery)..."
+                  style="flex: 1; padding: 0.6rem 0.9rem; background: rgba(0,0,0,0.4); border: 1px solid var(--border-dark); border-radius: var(--radius-sm); color: #ffffff; font-size: 0.88rem; outline: none;" />
+                <button id="compareAnswerBtn" class="compare-btn">Compare!</button>
+              </div>
+
+              <div id="preparedAnswerContainer"
+                style="display: none; background: rgba(0, 0, 0, 0.4); padding: 1.2rem; border-radius: var(--radius-sm); border: 1px solid var(--border-dark); margin-top: 0.8rem;">
+                <div
+                  style="font-size: 0.78rem; color: var(--accent-yellow); font-weight: 700; text-transform: uppercase; margin-bottom: 6px;">
+                  Narratological Analysis</div>
+                <p style="font-size: 0.9rem; color: #d1d1d6; line-height: 1.6; margin: 0;">
+                  In detective fiction narratology, 'the door' operates as the physical and structural threshold of the
+                  mystery. As Michael Cook (2011) analogises, detective fiction functions as a <em>'locked room
+                    mystery'</em> where the opening of the door introduces the client and initiates the investigation.
+                </p>
+                <div id="userAnswerFeedback"
+                  style="margin-top: 0.8rem; font-size: 0.85rem; color: var(--text-muted); font-style: italic; display: none;">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div
+            style="background: var(--bg-charcoal); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 1.8rem;">
+            <div style="margin-bottom: 1.2rem;">
+              <h3 style="font-size: 1.1rem; color: #ffffff;">Top Nouns Following 'the'</h3>
+            </div>
+
+            <div style="overflow-x: auto;">
+              <table style="width: 100%; border-collapse: collapse; text-align: left; font-size: 0.9rem;">
+                <thead>
+                  <tr style="border-bottom: 1px solid var(--border-dark); color: #a1a1aa; font-size: 0.8rem;">
+                    <th style="padding: 8px 4px;">#</th>
+                    <th style="padding: 8px 4px;">Noun</th>
+                    <th style="padding: 8px 4px;">Frequency</th>
+                  </tr>
+                </thead>
+                <tbody id="clusterTableBody">
+                  <!-- Populated dynamically by js/sherlock.js -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 2: The "Door" as a Narrative Boundary (TCU Explorer) -->
+    <section class="section section-dark" style="padding: 4rem 0;">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Turn Construction Unit (TCU) Alignment</span>
+          <h2 class="section-title">2. When 'The Door' Appears in the Narrative</h2>
+        </div>
+
+        <div style="margin-bottom: 2rem; display: flex; gap: 0.8rem; flex-wrap: wrap;" id="storySelectorWrap">
+          <button class="story-tab-btn active" data-story="bohemia">A Scandal in Bohemia (SH1)</button>
+          <button class="story-tab-btn" data-story="redheaded">The Red-Headed League (SH2)</button>
+          <button class="story-tab-btn" data-story="boscombe">The Boscombe Valley Mystery (SH4)</button>
+          <button class="story-tab-btn" data-story="twistedlip">The Man with the Twisted Lip (SH6)</button>
+          <button class="story-tab-btn" data-story="bachelor">The Noble Bachelor (SH10)</button>
+        </div>
+
+        <div
+          style="background: var(--bg-charcoal); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 2.2rem;">
+          <div style="display: grid; grid-template-columns: 1.2fr 1fr; gap: 2.5rem; align-items: start;">
+
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+                <h3 style="font-size: 1.6rem; color: #ffffff;" id="storyTitleDisplay">A Scandal in Bohemia</h3>
+                <span class="tag-sm"
+                  style="background: rgba(255, 208, 0, 0.15); color: var(--accent-yellow); border: 1px solid var(--accent-yellow-border);"
+                  id="doorTcuBadge">TCU #39</span>
+              </div>
+
+              <div
+                style="background: rgba(0, 0, 0, 0.3); padding: 1.5rem; border-radius: var(--radius-sm); border-left: 3px solid var(--accent-yellow); margin-bottom: 1.5rem;">
+                <div
+                  style="font-size: 0.75rem; color: var(--accent-yellow); text-transform: uppercase; font-weight: 700; margin-bottom: 6px;">
+                  Corpus Extract (First Door Occurrence)</div>
+                <blockquote style="font-size: 1rem; color: #ffffff; line-height: 1.7; font-style: italic;"
+                  id="passageQuoteDisplay">
+                  'A slow and heavy step, which had been heard upon the stairs and in the passage, paused immediately
+                  outside the door. Then there was a loud and authoritative tap of obstinacy. "Come in!" said Holmes.'
+                </blockquote>
+              </div>
+
+              <div style="margin-bottom: 1rem;">
+                <div style="font-size: 0.82rem; color: #a1a1aa; font-weight: 600; text-transform: uppercase;">
+                  Introduced Client</div>
+                <div style="font-size: 1.05rem; color: var(--accent-yellow); font-weight: 700;" id="clientNameDisplay">
+                  Count Von Kramm</div>
+              </div>
+            </div>
+
+            <div
+              style="background: rgba(255, 255, 255, 0.03); padding: 1.5rem; border-radius: var(--radius-sm); border: 1px solid var(--border-dark);">
+              <h4
+                style="font-family: var(--font-sans); font-size: 0.9rem; font-weight: 700; color: var(--accent-yellow); text-transform: uppercase; margin-bottom: 1rem;">
+                Narrative Structural Function</h4>
+              <p style="font-size: 0.92rem; color: #d1d1d6; line-height: 1.6;" id="analysisTextDisplay">
+                The first occurrence of 'the door' at TCU 39 marks the physical entrance of the masked client,
+                transforming Watson's introductory frame into active narrative mystery.
+              </p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 3: Holmes vs Watson POV Line Chart -->
+    <section class="section" style="padding: 4rem 0;">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-subtitle">Speech Turn Distribution</span>
+          <h2 class="section-title">3. Point of View &amp; Suspense Dynamics</h2>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.3fr 1fr; gap: 2.5rem; align-items: start;">
+          <div
+            style="background: var(--bg-charcoal); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 1.8rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
+              <h3 style="font-size: 1.1rem; color: #ffffff;">Turn Construction Units: Holmes vs Watson</h3>
+              <div style="display: flex; gap: 15px; font-size: 0.82rem;">
+                <span
+                  style="display: flex; align-items: center; gap: 6px; color: var(--accent-yellow); font-weight: 600;">
+                  <span style="width: 10px; height: 10px; background: var(--accent-yellow); border-radius: 50%;"></span>
+                  Sherlock Holmes (SH)
+                </span>
+                <span style="display: flex; align-items: center; gap: 6px; color: #a1a1aa; font-weight: 600;">
+                  <span style="width: 10px; height: 10px; background: #a1a1aa; border-radius: 50%;"></span> Dr Watson
+                  (JW)
+                </span>
+              </div>
+            </div>
+
+            <canvas id="povCanvas" style="width: 100%; height: 320px; display: block; cursor: crosshair;"></canvas>
+            <div style="text-align: center; font-size: 0.78rem; color: #71717a; margin-top: 10px;">
+              Story Progression (Turn Construction Unit Blocks)
+            </div>
+          </div>
+
+          <div>
+            <h3 style="font-size: 1.3rem; margin-bottom: 1rem;">Narrative Enclosure Theory</h3>
+            <p style="color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin-bottom: 1.2rem;">
+              According to Tzvetan Todorov's structural approaches and Hoeken &amp; van Vliet (2000), suspense is the
+              product of <em>'postponing the story&apos;s outcome'</em> through strategic POV switching.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 1rem;">
+              <div
+                style="background: var(--bg-secondary); padding: 1.2rem; border-radius: var(--radius-md); border-left: 3px solid #a1a1aa;">
+                <h4 style="font-size: 0.9rem; margin-bottom: 4px; color: var(--text-primary);">Watson's Framing &amp;
+                  Red
+                  Herrings</h4>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                  Watson dominates the exposition and rising action. His limited observations create red herrings that
+                  mislead the reader.
+                </p>
+              </div>
+
+              <div
+                style="background: var(--bg-secondary); padding: 1.2rem; border-radius: var(--radius-md); border-left: 3px solid var(--accent-yellow);">
+                <h4 style="font-size: 0.9rem; margin-bottom: 4px; color: var(--text-primary);">Holmes' Deductive Climax
+                </h4>
+                <p style="font-size: 0.85rem; color: var(--text-secondary);">
+                  Towards the climax, Holmes's POV takes over completely as he corrects Watson's mistakes and reveals
+                  the
+                  deductive chain of truth.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Module 4: Interactive Student Quiz / Self-Test -->
+    <section class="section section-dark" style="padding: 4rem 0;">
+      <div class="container">
+        <div style="max-width: 800px; margin: 0 auto;">
+          <div class="section-header" style="text-align: center;">
+            <span class="section-subtitle">Teaching Self-Assessment</span>
+            <h2 class="section-title">Test Your Stylometric Narratology Knowledge</h2>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 2rem;">
+            <!-- Question 1 -->
+            <div class="quiz-card"
+              style="background: var(--bg-charcoal); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 2rem;">
+              <div
+                style="font-size: 0.78rem; color: var(--accent-yellow); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">
+                Question 1 of 3 &bull; Narratology &amp; Framing</div>
+              <h3 style="font-size: 1.15rem; color: #ffffff; margin-bottom: 1.2rem;">
+                What is the primary structural role of Dr Watson's Turn Construction Units (TCUs) in Conan Doyle's short
+                stories?
+              </h3>
+
+              <div class="quiz-options-group">
+                <button class="quiz-option" data-correct="false">
+                  A. Watson dominates the climax by revealing the identity of the criminal before Holmes.
+                </button>
+                <button class="quiz-option" data-correct="true"
+                  data-explanation="In Todorovian narratology and Doyle's corpus, Watson's POV frames the story at the beginning (exposition) and end (resolution), whereas Holmes's voice takes over right before the climax when explaining his deductive chain.">
+                  B. Watson provides a frame story enwrapping the text, generating red herrings in rising action while
+                  Holmes takes over the climax.
+                </button>
+                <button class="quiz-option" data-correct="false">
+                  C. Watson's TCUs occur only after 'the door' is opened in the final chapter.
+                </button>
+              </div>
+
+              <div class="quiz-result"
+                style="display: none; padding: 1.2rem; border-radius: var(--radius-sm); border: 1px solid; margin-top: 1.2rem; font-size: 0.92rem; line-height: 1.6;">
+              </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="quiz-card"
+              style="background: var(--bg-charcoal); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 2rem;">
+              <div
+                style="font-size: 0.78rem; color: var(--accent-yellow); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">
+                Question 2 of 3 &bull; Corpus Collocations &amp; Narrative Boundaries</div>
+              <h3 style="font-size: 1.15rem; color: #ffffff; margin-bottom: 1.2rem;">
+                Why does the 2-gram collocation 'the door' rank as the #1 most frequent noun cluster following
+                &apos;the&apos; across the corpus?
+              </h3>
+
+              <div class="quiz-options-group">
+                <button class="quiz-option" data-correct="false">
+                  A. Conan Doyle included frequent descriptions of Victorian interior architectural woodworking.
+                </button>
+                <button class="quiz-option" data-correct="true"
+                  data-explanation="In detective fiction narratology (Cook, 2011), 'the door' operates as the physical and structural boundary of the 'locked room mystery'. Its opening introduces the client and initiates the investigation.">
+                  B. 'The door' operates as the physical and narrative threshold of the mystery, where its
+                  opening introduces the client and initiates the investigation.
+                </button>
+                <button class="quiz-option" data-correct="false">
+                  C. 'The door' appears only at the conclusion of each story when Holmes leaves Baker Street.
+                </button>
+              </div>
+
+              <div class="quiz-result"
+                style="display: none; padding: 1.2rem; border-radius: var(--radius-sm); border: 1px solid; margin-top: 1.2rem; font-size: 0.92rem; line-height: 1.6;">
+              </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="quiz-card"
+              style="background: var(--bg-charcoal); border: 1px solid var(--border-dark); border-radius: var(--radius-md); padding: 2rem;">
+              <div
+                style="font-size: 0.78rem; color: var(--accent-yellow); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;">
+                Question 3 of 3 &bull; Suspense &amp; Cognitive Processing</div>
+              <h3 style="font-size: 1.15rem; color: #ffffff; margin-bottom: 1.2rem;">
+                According to Hoeken &amp; van Vliet (2000), how does the shifting distribution of TCUs between Holmes
+                and Watson generate reader suspense?
+              </h3>
+
+              <div class="quiz-options-group">
+                <button class="quiz-option" data-correct="true"
+                  data-explanation="Suspense is the product of 'postponing the story's outcome' (Hoeken &amp; van Vliet, 2000). Watson's dominant framing and observations delay Holmes's revelation of truth until the climax.">
+                  A. By 'postponing the story's outcome' through Watson&apos;s limited framing and red
+                  herrings, delaying Holmes&apos;s revelation of truth until the climax.
+                </button>
+                <button class="quiz-option" data-correct="false">
+                  B. By making Sherlock Holmes speak constantly from the very first TCU of the exposition.
+                </button>
+                <button class="quiz-option" data-correct="false">
+                  C. By allowing Watson to solve the case early while Holmes attempts to disprove Watson&apos;s theory.
+                </button>
+              </div>
+
+              <div class="quiz-result"
+                style="display: none; padding: 1.2rem; border-radius: var(--radius-sm); border: 1px solid; margin-top: 1.2rem; font-size: 0.92rem; line-height: 1.6;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-copy">
+        &copy; 2026 Catherine Wong. Digital Humanities Institute, University of Sheffield.
+      </div>
+      <ul class="footer-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#tools">Tools</a></li>
+        <li><a href="index.html#publications">Publications</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/sherlock.js?v=12"></script>
+  <script src="js/app.js"></script>
+</body>
+
+</html>

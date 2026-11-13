@@ -1498,14 +1498,15 @@ details.tool-details-collapse[open] summary::after {
     display: none !important;
   }
   
-  .pres-layout {
+   .pres-layout {
     grid-template-columns: 1fr !important;
   }
-  
+
   .pres-frame-wrap {
     display: none !important;
   }
-   
+}
+
 /* Data Language Analytics teaching plan */
 
 .module-plan-card {
@@ -1683,6 +1684,6 @@ details.tool-details-collapse[open] summary::after {
   }
 }
 
-}
+
 
 

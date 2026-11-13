@@ -1505,6 +1505,184 @@ details.tool-details-collapse[open] summary::after {
   .pres-frame-wrap {
     display: none !important;
   }
+   
+/* Data Language Analytics teaching plan */
+
+.module-plan-card {
+  background: var(--bg-charcoal);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+.module-plan-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 2.2rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.module-plan-summary::-webkit-details-marker {
+  display: none;
+}
+
+.module-plan-summary:focus-visible {
+  outline: 2px solid var(--accent-yellow);
+  outline-offset: -4px;
+}
+
+.module-plan-kicker {
+  color: var(--accent-yellow);
+  font: 700 0.78rem var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.module-plan-title {
+  color: #ffffff;
+  font: 700 1.8rem var(--font-serif);
+}
+
+.module-plan-description {
+  color: #d1d1d6;
+  font-size: 0.98rem;
+}
+
+.module-plan-action {
+  color: var(--accent-yellow);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.module-plan-action span {
+  display: inline-block;
+  transition: transform 0.2s;
+}
+
+.module-plan-card[open] .module-plan-action span {
+  transform: rotate(180deg);
+}
+
+.module-plan-content {
+  padding: 0 2.2rem 2.2rem;
+}
+
+.module-plan-content h4 {
+  color: var(--accent-yellow);
+  font: 700 1.05rem var(--font-sans);
+  margin: 2rem 0 0.8rem;
+}
+
+.module-plan-content p {
+  color: #d1d1d6;
+  line-height: 1.7;
+}
+
+/* Weekly teaching plan and reading tables */
+
+.module-table-scroll {
+  overflow-x: auto;
+  width: 100%;
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-sm);
+}
+
+.module-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.86rem;
+  min-width: 760px;
+}
+
+.module-table th,
+.module-table td {
+  padding: 0.85rem 0.9rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--border-dark);
+  color: #e4e4e7;
+}
+
+.module-table thead th {
+  background: #141415;
+  color: var(--accent-yellow);
+  font-weight: 700;
+}
+
+.module-table tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
+.module-table tbody th {
+  color: var(--accent-yellow);
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.module-table td strong {
+  display: block;
+  color: #ffffff;
+  font-weight: 600;
+}
+
+.module-theme {
+  display: block;
+  color: #a1a1aa;
+  font-size: 0.78rem;
+  margin-bottom: 0.3rem;
+}
+
+.module-reading-table {
+  min-width: 620px;
+}
+
+.module-reading-table td p {
+  margin: 0 0 0.8rem;
+  color: #e4e4e7;
+}
+
+.module-reading-table td p:last-child {
+  margin-bottom: 0;
+}
+
+.module-plan-content a:not(.btn) {
+  color: var(--accent-yellow);
+  text-decoration: underline;
+}
+
+/* Feedback invitation */
+
+.module-feedback {
+  margin-top: 2rem;
+  border-top: 1px solid var(--border-dark);
+  padding-top: 0.3rem;
+}
+
+.module-feedback .btn {
+  margin-top: 0.5rem;
+}
+
+/* Mobile layout */
+
+@media (max-width: 768px) {
+  .module-plan-summary {
+    padding: 1.4rem;
+  }
+
+  .module-plan-content {
+    padding: 0 1.4rem 1.4rem;
+  }
+
+  .module-plan-title {
+    font-size: 1.5rem;
+  }
+}
+
 }
 
 

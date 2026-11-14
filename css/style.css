@@ -1683,7 +1683,24 @@ details.tool-details-collapse[open] summary::after {
     font-size: 1.5rem;
   }
 }
+/* Teaching plan expand button */
 
+.module-plan-action.btn {
+  align-self: flex-start;
+  width: fit-content;
+  margin-top: 1rem;
+  color: var(--text-primary);
+}
+
+.module-plan-summary:hover .module-plan-action.btn {
+  background-color: var(--accent-yellow-hover);
+  border-color: var(--accent-yellow-hover);
+}
+
+.module-plan-card[open] .module-plan-action.btn {
+  background-color: var(--accent-yellow);
+  color: var(--text-primary);
+}
 
 
 

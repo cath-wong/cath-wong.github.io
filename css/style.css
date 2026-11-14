@@ -1710,6 +1710,89 @@ details.tool-details-collapse[open] summary::after {
   color: #141415 !important;
 }
 
+/* Data Language Analytics: two-column card layout */
+
+.module-plan-summary {
+  display: block;
+}
+
+.module-plan-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.module-plan-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.module-plan-kicker {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.module-plan-title {
+  margin-bottom: 0.8rem;
+}
+
+.module-plan-description {
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+}
+
+.module-plan-info .module-plan-action {
+  align-self: flex-start;
+  width: fit-content;
+  max-width: 100%;
+  flex: none;
+  margin-top: 0;
+  color: #141415 !important;
+}
+
+/* Features panel matching the other tool cards */
+
+.module-plan-features {
+  background: rgba(0, 0, 0, 0.25);
+  padding: 1.4rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-dark);
+  border-left: 3px solid var(--accent-yellow);
+}
+
+.module-plan-features h4 {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-yellow);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.9rem;
+}
+
+.module-plan-features ul {
+  list-style-type: disc;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: #d1d1d6;
+  font-family: var(--font-sans);
+}
+
+/* Responsive layout */
+
+@media (max-width: 768px) {
+  .module-plan-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+
 .module-plan-card[open] .module-plan-action.btn {
   background-color: var(--accent-yellow);
   color: #141415 !important;

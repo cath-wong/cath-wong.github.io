@@ -1683,24 +1683,35 @@ details.tool-details-collapse[open] summary::after {
     font-size: 1.5rem;
   }
 }
+
 /* Teaching plan expand button */
 
-.module-plan-action.btn {
+.module-plan-summary .module-plan-action.btn {
+  display: inline-flex;
   align-self: flex-start;
-  width: fit-content;
+  flex: 0 0 auto;
+  width: auto;
+  max-width: 100%;
+  padding: 6px 14px;
   margin-top: 1rem;
-  color: var(--text-primary);
+  background-color: var(--accent-yellow);
+  border: 2px solid var(--accent-yellow);
+  color: #141415 !important;
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: normal;
 }
 
 .module-plan-summary:hover .module-plan-action.btn {
   background-color: var(--accent-yellow-hover);
   border-color: var(--accent-yellow-hover);
+  color: #141415 !important;
 }
 
 .module-plan-card[open] .module-plan-action.btn {
   background-color: var(--accent-yellow);
-  color: var(--text-primary);
+  color: #141415 !important;
 }
-
-
 

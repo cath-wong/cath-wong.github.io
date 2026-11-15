@@ -1,0 +1,206 @@
+
+<!DOCTYPE html>
+<html lang="en-GB">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>What counts as a word? | Data Language Analytics</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600;700&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/style.css?v=4">
+  <script src="js/tokenisation.js" defer></script>
+</head>
+
+<body class="token-page">
+
+  <main class="token-container">
+
+    <header class="token-header">
+      <a href="index.html#tools" class="token-back">
+        &larr; Back to Data Language Analytics
+      </a>
+
+      <p class="token-kicker">HPH451 | WEEK 1</p>
+
+      <h1>What counts as a word?</h1>
+      <p class="token-subtitle">Tokenisation and Type Explorer</p>
+
+      <p class="token-introduction">
+        Before we can count words, we need to decide what counts
+        as a word. Explore how different segmentation rules
+        affect the units we identify and count.
+      </p>
+    </header>
+
+    <!-- Language tabs -->
+    <nav class="token-tabs" aria-label="Tokenisation approaches">
+      <button type="button" class="token-tab active"
+              data-tab="whitespace" aria-selected="true">
+        Whitespace
+      </button>
+
+      <button type="button" class="token-tab"
+              data-tab="chinese" aria-selected="false">
+        Chinese
+      </button>
+
+      <button type="button" class="token-tab"
+              data-tab="other" aria-selected="false">
+        Other languages
+      </button>
+    </nav>
+
+    <!-- Whitespace tab -->
+    <section class="token-panel" id="token-whitespace">
+      <h2>Whitespace tokenisation</h2>
+
+      <p>
+        This approach separates text wherever whitespace occurs.
+        Punctuation and capitalisation are preserved.
+      </p>
+
+      <label for="token-whitespace-input">Enter or edit your text</label>
+
+      <textarea id="token-whitespace-input" rows="5">The king saw the king. The kings smiled.</textarea>
+
+      <div class="token-actions">
+        <button type="button" class="btn btn-primary"
+                id="token-whitespace-analyse">
+          Analyse text
+        </button>
+
+        <button type="button" class="token-reset"
+                id="token-whitespace-reset">
+          Reset example
+        </button>
+      </div>
+    </section>
+
+    <!-- Chinese tab -->
+    <section class="token-panel" id="token-chinese" hidden>
+      <h2>Chinese text segmentation</h2>
+
+      <p>
+        Written Chinese does not normally use spaces to separate
+        words. Compare character-based segmentation with
+        word-based segmentation to see how the results differ.
+      </p>
+
+      <label for="token-chinese-input">Enter or edit your text</label>
+
+      <textarea id="token-chinese-input" rows="5">我喜歡讀書。我也喜歡音樂。</textarea>
+
+      <fieldset class="token-methods">
+        <legend>Choose a segmentation method</legend>
+
+        <label>
+          <input type="radio" name="token-chinese-method"
+                 value="character" checked>
+          Character-based segmentation
+        </label>
+
+        <label>
+          <input type="radio" name="token-chinese-method"
+                 value="word">
+          Word-based segmentation
+        </label>
+      </fieldset>
+
+      <p class="token-method-note" id="token-chinese-note">
+        Character-based segmentation treats each Chinese character
+        as a separate unit.
+      </p>
+
+      <div class="token-actions">
+        <button type="button" class="btn btn-primary"
+                id="token-chinese-analyse">
+          Analyse text
+        </button>
+
+        <button type="button" class="token-reset"
+                id="token-chinese-reset">
+          Reset example
+        </button>
+      </div>
+    </section>
+
+    <!-- Other languages tab -->
+    <section class="token-panel token-coming-soon"
+             id="token-other" hidden>
+
+      <div class="token-spanner" aria-hidden="true">
+        &#128295;
+      </div>
+
+      <h2>More languages coming soon</h2>
+
+      <p>
+        Future examples will explore different tokenisation
+        challenges in Japanese, Korean, Thai, Tibetan, Arabic
+        and other languages.
+      </p>
+    </section>
+
+    <!-- Results -->
+    <section class="token-results" id="token-results" hidden
+             aria-live="polite">
+
+      <h2>Analysis results</h2>
+
+      <div class="token-metrics">
+        <div class="token-metric">
+          <span class="token-metric-value" id="token-count">0</span>
+          <span class="token-metric-label">Tokens</span>
+        </div>
+
+        <div class="token-metric">
+          <span class="token-metric-value" id="token-type-count">0</span>
+          <span class="token-metric-label">Types</span>
+        </div>
+      </div>
+
+      <h3>How was the text segmented?</h3>
+      <p>Each box represents one token.</p>
+
+      <div class="token-segments" id="token-segments"></div>
+
+      <h3>Type frequencies</h3>
+      <p>How often does each distinct type occur?</p>
+
+      <div class="token-table-wrap">
+        <table class="token-frequency-table">
+          <thead>
+            <tr>
+              <th scope="col">Type</th>
+              <th scope="col">Frequency</th>
+            </tr>
+          </thead>
+          <tbody id="token-frequency-body"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Reflection -->
+    <section class="token-reflection">
+      <h2>Questions to consider</h2>
+
+      <ol>
+        <li>How would you explain the difference between a token and a type?</li>
+        <li>Does every token necessarily correspond to a linguistic word?</li>
+        <li>How might different segmentation rules change the results of an analysis?</li>
+      </ol>
+    </section>
+
+    <footer class="token-footer">
+      Data Language Analytics | University of Sheffield
+    </footer>
+
+  </main>
+
+</body>
+</html>

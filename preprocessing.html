@@ -580,168 +580,126 @@ function normalise() {
 
 $('n-apply').addEventListener('click', normalise);
 
-// English lemmatisation dictionary
 
-const dictionary = {
-  children: 'child',
-  men: 'man',
-  women: 'woman',
-  mice: 'mouse',
-  geese: 'goose',
-  teeth: 'tooth',
-  feet: 'foot',
-  people: 'person',
-
-  kings: 'king',
-  cats: 'cat',
-  dogs: 'dog',
-  houses: 'house',
-  books: 'book',
-
-  walks: 'walk',
-  walked: 'walk',
-  walking: 'walk',
-
-  runs: 'run',
-  running: 'run',
-  ran: 'run',
-
-  goes: 'go',
-  going: 'go',
-  went: 'go',
-  gone: 'go',
-
-  sees: 'see',
-  seeing: 'see',
-  saw: 'see',
-  seen: 'see',
-
-  was: 'be',
-  were: 'be',
-  is: 'be',
-  are: 'be',
-  am: 'be',
-  been: 'be',
-  being: 'be',
-
-  has: 'have',
-  had: 'have',
-  having: 'have',
-
-  does: 'do',
-  did: 'do',
-  done: 'do',
-  doing: 'do',
-
-  ate: 'eat',
-  eaten: 'eat',
-  eating: 'eat',
-
-  better: 'good',
-  best: 'good',
-  worse: 'bad',
-  worst: 'bad',
-
-  studies: 'study',
-  studied: 'study',
-  studying: 'study',
-
-  tries: 'try',
-  tried: 'try',
-  trying: 'try',
-
-  smiles: 'smile',
-  smiled: 'smile',
-  smiling: 'smile',
-
-  likes: 'like',
-  liked: 'like',
-  liking: 'like',
-
-  visited: 'visit',
-  visiting: 'visit',
-  visits: 'visit',
-
-  loved: 'love',
-  loving: 'love',
-  loves: 'love'
-};
+/* English lemmatisation using Compromise */
 
 let lemmaSource = '';
-let overrides = {};
+let lemmaSuggestions = [];
+
+function getWords(text) {
+  return text.match(/[A-Za-z]+(?:'[A-Za-z]+)?/g) || [];
+}
+
+function suggestLemmas(text) {
+  if (typeof nlp === 'undefined') {
+    throw new Error('The NLP library could not be loaded.');
+  }
+
+  // Analyse the complete text for grammatical context.
+  const doc = nlp(text);
+
+  // Work on a separate copy so the original is preserved.
+  const processed = nlp(text);
+
+  // Convert recognised verbs to infinitives.
+  processed.verbs().toInfinitive();
+
+  // Convert recognised plural nouns to singular forms.
+  processed.nouns().isPlural().toSingular();
+
+  const originals = getWords(doc.text());
+  const transformed = getWords(processed.text());
+
+  if (originals.length !== transformed.length) {
+    throw new Error(
+      'The NLP analysis changed the token boundaries. ' +
+      'Please try a shorter text.'
+    );
+  }
+
+  return originals.map((word, index) => ({
+    original: word,
+    lemma: transformed[index]
+  }));
+}
 
 function renderLemma() {
-  $('l-output').value = lemmaSource.replace(
+  let index = 0;
+
+  // Preserve the original spacing and punctuation.
+  const result = lemmaSource.replace(
     /[A-Za-z]+(?:'[A-Za-z]+)?/g,
     word => {
-      const lemma =
-        overrides[word.toLowerCase()] ??
-        dictionary[word.toLowerCase()];
+      const suggestion = lemmaSuggestions[index++];
 
-      if (!lemma) return word;
+      if (!suggestion) return word;
 
-      if (word === word.toUpperCase()) {
-        return lemma.toUpperCase();
-      }
-
-      if (word[0] === word[0].toUpperCase()) {
-        return lemma[0].toUpperCase() + lemma.slice(1);
-      }
-
-      return lemma;
+      return suggestion.lemma;
     }
   );
+
+  $('l-output').value = result;
 }
 
 function lemmatise() {
   lemmaSource = $('l-input').value;
-  overrides = {};
-
-  const words = lemmaSource.match(
-    /[A-Za-z]+(?:'[A-Za-z]+)?/g
-  ) || [];
-
-  const forms = [...new Set(
-    words.map(word => word.toLowerCase())
-  )].filter(
-    word => dictionary[word] &&
-            dictionary[word] !== word
-  );
 
   $('rows').replaceChildren();
+  $('review').classList.add('hidden');
 
-  for (const form of forms) {
+  if (!lemmaSource.trim()) {
+    $('l-output').value = '';
+    $('l-status').textContent = 'Please enter some text.';
+    return;
+  }
+
+  try {
+    lemmaSuggestions = suggestLemmas(lemmaSource);
+  } catch (error) {
+    $('l-output').value = '';
+    $('l-status').textContent = error.message;
+    return;
+  }
+
+  let changes = 0;
+
+  lemmaSuggestions.forEach((item, index) => {
+    if (item.original.toLowerCase() ===
+        item.lemma.toLowerCase()) {
+      return;
+    }
+
+    changes++;
+
     const row = document.createElement('tr');
     const originalCell = document.createElement('td');
     const lemmaCell = document.createElement('td');
     const input = document.createElement('input');
 
-    originalCell.textContent = form;
-    input.value = dictionary[form];
+    originalCell.textContent = item.original;
+    input.value = item.lemma;
 
     input.setAttribute(
       'aria-label',
-      'Lemma for ' + form
+      'Suggested lemma for ' + item.original
     );
 
     input.addEventListener('input', () => {
-      overrides[form] = input.value;
+      lemmaSuggestions[index].lemma = input.value;
       renderLemma();
     });
 
     lemmaCell.append(input);
     row.append(originalCell, lemmaCell);
-    $('rows').append(row);
-  }
 
-  $('review').classList.toggle(
-    'hidden',
-    forms.length === 0
-  );
+    $('rows').append(row);
+  });
+
+  $('review').classList.toggle('hidden', changes === 0);
 
   $('l-status').textContent =
-    forms.length +
-    ' recognised form(s). Other words are unchanged.';
+    changes + ' suggested change(s). ' +
+    'Review the results before using them.';
 
   renderLemma();
 }

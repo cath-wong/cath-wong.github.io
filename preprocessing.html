@@ -1,0 +1,787 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Text Preprocessing Lab | Week 2</title>
+
+<style>
+:root {
+  --bg: #191b1e;
+  --panel: #25282c;
+  --line: #4a4d51;
+  --text: #f2f0ea;
+  --muted: #b9bbbd;
+  --accent: #f0cf69;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.55 system-ui, sans-serif;
+}
+
+main {
+  max-width: 980px;
+  margin: auto;
+  padding: 40px 22px 80px;
+}
+
+a {
+  color: var(--accent);
+}
+
+h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.15;
+  margin: 8px 0;
+}
+
+h2 {
+  font-size: 1.3rem;
+  margin: 0 0 8px;
+}
+
+p, small {
+  color: var(--muted);
+}
+
+.eyebrow {
+  color: var(--accent);
+  font-size: .8rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.panel {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  padding: 22px;
+  border-radius: 12px;
+  margin: 18px 0;
+}
+
+.tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.tab {
+  flex: 1;
+  background: transparent;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  padding: 12px;
+  cursor: pointer;
+  font-weight: 700;
+  border-radius: 8px 8px 0 0;
+}
+
+.tab[aria-selected="true"] {
+  background: var(--panel);
+  color: var(--accent);
+  border-bottom-color: var(--panel);
+}
+
+.tabpane {
+  margin-top: 0;
+  border-radius: 0 0 12px 12px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+label {
+  display: block;
+  font-weight: 600;
+  margin: 12px 0 6px;
+}
+
+textarea,
+input:not([type="checkbox"]),
+select {
+  width: 100%;
+  background: #17191c;
+  color: var(--text);
+  border: 1px solid #777;
+  border-radius: 7px;
+  padding: 10px;
+  font: inherit;
+}
+
+textarea {
+  min-height: 105px;
+  resize: vertical;
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 400;
+}
+
+.check input {
+  accent-color: var(--accent);
+}
+
+.options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 5px 15px;
+  margin: 12px 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 17px 0;
+}
+
+button.action {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 7px;
+  padding: 10px 16px;
+  color: #191919;
+  font-weight: 750;
+  cursor: pointer;
+}
+
+button.secondary {
+  background: transparent;
+  color: var(--accent);
+}
+
+.hint {
+  font-size: .87rem;
+}
+
+.notice {
+  border-left: 3px solid var(--accent);
+  background: #343126;
+  padding: 10px 14px;
+  color: var(--text);
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th, td {
+  text-align: left;
+  padding: 9px;
+  border-bottom: 1px solid var(--line);
+}
+
+th {
+  color: var(--accent);
+}
+
+.tablewrap {
+  max-height: 280px;
+  overflow: auto;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 3px solid white;
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  main {
+    padding: 24px 14px;
+  }
+
+  .panel {
+    padding: 15px;
+  }
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<a href="index.html">← Back to teaching plan</a>
+
+<div class="eyebrow" style="margin-top:25px">
+  Data Language Analytics · Week 2
+</div>
+
+<h1>Text Preprocessing Lab</h1>
+
+<p>
+  How do choices about preparing text change the language data
+  we analyse? Experiment with normalisation and lemmatisation,
+  then compare your results using the Week 1 Tokenisation Explorer.
+</p>
+
+<div class="tabs" role="tablist" aria-label="Preprocessing tools">
+  <button id="tab-n" class="tab" role="tab"
+          aria-selected="true" aria-controls="normal">
+    Normalisation
+  </button>
+
+  <button id="tab-l" class="tab" role="tab"
+          aria-selected="false" aria-controls="lemma">
+    Lemmatisation
+  </button>
+</div>
+
+<!-- NORMALISATION TAB -->
+
+<section class="panel tabpane" id="normal"
+         role="tabpanel" aria-labelledby="tab-n">
+
+  <h2>Text normalisation</h2>
+
+  <p>
+    Select any combination of operations.
+    Your original text remains unchanged.
+  </p>
+
+  <label for="n-input">Original text (English or Chinese)</label>
+
+  <textarea id="n-input">The King visited the theatre.  The kings liked its colour!
+國王 看見了  國王。國王們，也看見了國王！</textarea>
+
+  <div class="options">
+    <label class="check">
+      <input type="checkbox" id="lower" checked>
+      Convert to lowercase
+    </label>
+
+    <label class="check">
+      <input type="checkbox" id="punct" checked>
+      Remove punctuation (including Chinese punctuation)
+    </label>
+  </div>
+
+  <label for="space">Whitespace handling</label>
+
+  <select id="space">
+    <option value="keep">Keep original whitespace</option>
+    <option value="collapse" selected>
+      Normalise whitespace (collapse repeated spaces)
+    </option>
+    <option value="remove">Remove all whitespace</option>
+  </select>
+
+  <label class="check">
+    <input type="checkbox" id="spelling">
+    Standardise British/American spelling
+  </label>
+
+  <label for="target">Target spelling convention</label>
+
+  <select id="target">
+    <option value="uk">British English</option>
+    <option value="us">American English</option>
+  </select>
+
+  <p class="hint">
+    Only a limited set of known spelling pairs is supported.
+    This is not a comprehensive spelling corrector.
+  </p>
+
+  <label class="check">
+    <input type="checkbox" id="custom">
+    Apply custom spelling or text replacements
+  </label>
+
+  <label for="mappings">
+    Custom replacements, one per line (original = replacement)
+  </label>
+
+  <textarea id="mappings" style="min-height:75px"
+            placeholder="publick = public&#10;shew = show&#10;國王們 = 國王"></textarea>
+
+  <p class="hint">
+    English replacements match whole words.
+    Chinese replacements match exact character sequences.
+    Custom replacements run before the other operations.
+  </p>
+
+  <div class="actions">
+    <button class="action" id="n-apply">
+      Apply normalisation
+    </button>
+
+    <button class="action secondary" id="n-copy">
+      Copy processed text
+    </button>
+  </div>
+
+  <label for="n-output">Processed text</label>
+
+  <textarea id="n-output" readonly></textarea>
+
+  <p class="hint" id="n-status" role="status"></p>
+</section>
+
+<!-- LEMMATISATION TAB -->
+
+<section class="panel tabpane hidden" id="lemma"
+         role="tabpanel" aria-labelledby="tab-l">
+
+  <h2>English lemmatisation</h2>
+
+  <p>
+    Explore how inflected forms map to lemmas.
+    This is a limited teaching demonstrator,
+    not a comprehensive grammatical lemmatiser.
+  </p>
+
+  <label for="l-input">Original English text</label>
+
+  <textarea id="l-input">The children were running. A child runs and the women walked. The mice went home.</textarea>
+
+  <div class="notice">
+    Lemmatisation can depend on grammatical context.
+    For example, ‘saw’ can be a noun or the past tense of ‘see’.
+    This tool proposes lemmas for recognised forms and leaves
+    others unchanged. Check the suggestions carefully.
+  </div>
+
+  <div class="actions">
+    <button class="action" id="l-apply">
+      Suggest lemmas
+    </button>
+
+    <button class="action secondary" id="l-copy">
+      Copy lemmatised text
+    </button>
+  </div>
+
+  <div id="review" class="hidden">
+    <h2>Review suggestions</h2>
+
+    <p class="hint">
+      You can edit each suggested lemma.
+      Repeated forms share the same correction.
+    </p>
+
+    <div class="tablewrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Original form</th>
+            <th>Suggested lemma (editable)</th>
+          </tr>
+        </thead>
+        <tbody id="rows"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <label for="l-output">Processed text</label>
+
+  <textarea id="l-output" readonly></textarea>
+
+  <p class="hint" id="l-status" role="status"></p>
+</section>
+
+<!-- WEEK 1 CONNECTION -->
+
+<section class="panel">
+  <h2>Return to Week 1</h2>
+
+  <p>
+    Copy the original and processed texts into the Tokenisation
+    Explorer separately. Compare their token and type counts.
+    Which choices changed the counts? What information might
+    have been lost?
+  </p>
+
+  <a href="tokenisation.html"
+     target="_blank"
+     rel="noopener noreferrer">
+    Try the Tokenisation Explorer &rarr;
+  </a>
+</section>
+
+<small>
+  This page processes text locally in your browser.
+  No text is sent to a server. Always review automatic
+  transformations, especially for historical and multilingual data.
+</small>
+
+</main>
+
+<script>
+'use strict';
+
+const $ = id => document.getElementById(id);
+
+// Tab navigation
+
+for (const [tab, panel, otherTab, otherPanel] of [
+  ['tab-n', 'normal', 'tab-l', 'lemma'],
+  ['tab-l', 'lemma', 'tab-n', 'normal']
+]) {
+  $(tab).addEventListener('click', () => {
+    $(tab).setAttribute('aria-selected', 'true');
+    $(otherTab).setAttribute('aria-selected', 'false');
+
+    $(panel).classList.remove('hidden');
+    $(otherPanel).classList.add('hidden');
+  });
+}
+
+// British and American spelling pairs
+
+const pairs = [
+  ['colour', 'color'],
+  ['colours', 'colors'],
+  ['favour', 'favor'],
+  ['favourite', 'favorite'],
+  ['honour', 'honor'],
+  ['labour', 'labor'],
+  ['neighbour', 'neighbor'],
+  ['centre', 'center'],
+  ['theatre', 'theater'],
+  ['metre', 'meter'],
+  ['organise', 'organize'],
+  ['organised', 'organized'],
+  ['organising', 'organizing'],
+  ['recognise', 'recognize'],
+  ['analyse', 'analyze'],
+  ['analysed', 'analyzed'],
+  ['travelling', 'traveling'],
+  ['travelled', 'traveled'],
+  ['cancelled', 'canceled'],
+  ['defence', 'defense']
+];
+
+function escapeRegex(text) {
+  return text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function replaceWord(text, from, to) {
+  const pattern = new RegExp(
+    '(?<![\\p{L}])' +
+    escapeRegex(from) +
+    '(?![\\p{L}])',
+    'giu'
+  );
+
+  return text.replace(pattern, match => {
+    if (match === match.toUpperCase()) {
+      return to.toUpperCase();
+    }
+
+    if (match[0] === match[0].toUpperCase()) {
+      return to[0].toUpperCase() + to.slice(1);
+    }
+
+    return to;
+  });
+}
+
+// Normalisation
+
+function normalise() {
+  let text = $('n-input').value;
+  let changes = 0;
+
+  // Custom replacements
+
+  if ($('custom').checked) {
+    const lines = $('mappings').value.split(/\r?\n/);
+
+    for (const line of lines) {
+      const index = line.indexOf('=');
+
+      if (index < 1) continue;
+
+      const from = line.slice(0, index).trim();
+      const to = line.slice(index + 1).trim();
+
+      if (!from) continue;
+
+      const before = text;
+
+      if (/[A-Za-z]/.test(from)) {
+        text = replaceWord(text, from, to);
+      } else {
+        text = text.split(from).join(to);
+      }
+
+      if (text !== before) changes++;
+    }
+  }
+
+  // British/American spelling
+
+  if ($('spelling').checked) {
+    const british = $('target').value === 'uk';
+
+    for (const [uk, us] of pairs) {
+      const before = text;
+
+      text = replaceWord(
+        text,
+        british ? us : uk,
+        british ? uk : us
+      );
+
+      if (text !== before) changes++;
+    }
+  }
+
+  // Lowercase
+
+  if ($('lower').checked) {
+    text = text.toLowerCase();
+  }
+
+  // Unicode punctuation, including Chinese punctuation
+
+  if ($('punct').checked) {
+    text = text.replace(/\p{P}/gu, '');
+  }
+
+  // Whitespace
+
+  const spaceMode = $('space').value;
+
+  if (spaceMode === 'collapse') {
+    text = text.replace(/\s+/g, ' ').trim();
+  }
+
+  if (spaceMode === 'remove') {
+    text = text.replace(/\s+/g, '');
+  }
+
+  $('n-output').value = text;
+
+  $('n-status').textContent =
+    'Output generated. ' + changes +
+    ' spelling or custom replacement rule(s) changed the text.';
+}
+
+$('n-apply').addEventListener('click', normalise);
+
+// English lemmatisation dictionary
+
+const dictionary = {
+  children: 'child',
+  men: 'man',
+  women: 'woman',
+  mice: 'mouse',
+  geese: 'goose',
+  teeth: 'tooth',
+  feet: 'foot',
+  people: 'person',
+
+  kings: 'king',
+  cats: 'cat',
+  dogs: 'dog',
+  houses: 'house',
+  books: 'book',
+
+  walks: 'walk',
+  walked: 'walk',
+  walking: 'walk',
+
+  runs: 'run',
+  running: 'run',
+  ran: 'run',
+
+  goes: 'go',
+  going: 'go',
+  went: 'go',
+  gone: 'go',
+
+  sees: 'see',
+  seeing: 'see',
+  saw: 'see',
+  seen: 'see',
+
+  was: 'be',
+  were: 'be',
+  is: 'be',
+  are: 'be',
+  am: 'be',
+  been: 'be',
+  being: 'be',
+
+  has: 'have',
+  had: 'have',
+  having: 'have',
+
+  does: 'do',
+  did: 'do',
+  done: 'do',
+  doing: 'do',
+
+  ate: 'eat',
+  eaten: 'eat',
+  eating: 'eat',
+
+  better: 'good',
+  best: 'good',
+  worse: 'bad',
+  worst: 'bad',
+
+  studies: 'study',
+  studied: 'study',
+  studying: 'study',
+
+  tries: 'try',
+  tried: 'try',
+  trying: 'try',
+
+  smiles: 'smile',
+  smiled: 'smile',
+  smiling: 'smile',
+
+  likes: 'like',
+  liked: 'like',
+  liking: 'like',
+
+  visited: 'visit',
+  visiting: 'visit',
+  visits: 'visit',
+
+  loved: 'love',
+  loving: 'love',
+  loves: 'love'
+};
+
+let lemmaSource = '';
+let overrides = {};
+
+function renderLemma() {
+  $('l-output').value = lemmaSource.replace(
+    /[A-Za-z]+(?:'[A-Za-z]+)?/g,
+    word => {
+      const lemma =
+        overrides[word.toLowerCase()] ??
+        dictionary[word.toLowerCase()];
+
+      if (!lemma) return word;
+
+      if (word === word.toUpperCase()) {
+        return lemma.toUpperCase();
+      }
+
+      if (word[0] === word[0].toUpperCase()) {
+        return lemma[0].toUpperCase() + lemma.slice(1);
+      }
+
+      return lemma;
+    }
+  );
+}
+
+function lemmatise() {
+  lemmaSource = $('l-input').value;
+  overrides = {};
+
+  const words = lemmaSource.match(
+    /[A-Za-z]+(?:'[A-Za-z]+)?/g
+  ) || [];
+
+  const forms = [...new Set(
+    words.map(word => word.toLowerCase())
+  )].filter(
+    word => dictionary[word] &&
+            dictionary[word] !== word
+  );
+
+  $('rows').replaceChildren();
+
+  for (const form of forms) {
+    const row = document.createElement('tr');
+    const originalCell = document.createElement('td');
+    const lemmaCell = document.createElement('td');
+    const input = document.createElement('input');
+
+    originalCell.textContent = form;
+    input.value = dictionary[form];
+
+    input.setAttribute(
+      'aria-label',
+      'Lemma for ' + form
+    );
+
+    input.addEventListener('input', () => {
+      overrides[form] = input.value;
+      renderLemma();
+    });
+
+    lemmaCell.append(input);
+    row.append(originalCell, lemmaCell);
+    $('rows').append(row);
+  }
+
+  $('review').classList.toggle(
+    'hidden',
+    forms.length === 0
+  );
+
+  $('l-status').textContent =
+    forms.length +
+    ' recognised form(s). Other words are unchanged.';
+
+  renderLemma();
+}
+
+$('l-apply').addEventListener('click', lemmatise);
+
+// Copy output
+
+async function copyOutput(outputId, statusId) {
+  const output = $(outputId);
+
+  if (!output.value) {
+    $(statusId).textContent =
+      'Generate an output first.';
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(output.value);
+    $(statusId).textContent = 'Copied to clipboard.';
+  } catch (error) {
+    output.focus();
+    output.select();
+
+    $(statusId).textContent =
+      'Please copy the selected text manually.';
+  }
+}
+
+$('n-copy').addEventListener('click', () => {
+  copyOutput('n-output', 'n-status');
+});
+
+$('l-copy').addEventListener('click', () => {
+  copyOutput('l-output', 'l-status');
+});
+
+// Generate initial examples
+
+normalise();
+lemmatise();
+
+</script>
+</body>
+</html>

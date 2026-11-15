@@ -1798,3 +1798,409 @@ details.tool-details-collapse[open] summary::after {
   color: #141415 !important;
 }
 
+/* ============================================================
+   HPH451: Tokenisation and Type Explorer
+   ============================================================ */
+
+.token-page {
+  background: var(--bg-dark);
+  color: var(--text-on-dark);
+  min-height: 100vh;
+  font-family: var(--font-sans);
+}
+
+.token-container {
+  width: min(100% - 3rem, 1050px);
+  margin: 0 auto;
+  padding: 3rem 0 4rem;
+}
+
+/* Header */
+
+.token-header {
+  margin-bottom: 2.5rem;
+}
+
+.token-back {
+  display: inline-block;
+  color: #b4b4bc;
+  font-size: 0.9rem;
+  margin-bottom: 2.5rem;
+}
+
+.token-back:hover {
+  color: var(--accent-yellow);
+}
+
+.token-kicker {
+  color: var(--accent-yellow);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+}
+
+.token-header h1 {
+  color: #ffffff;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  margin-bottom: 0.4rem;
+}
+
+.token-subtitle {
+  color: var(--accent-yellow);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 1.2rem;
+}
+
+.token-introduction {
+  color: #d1d1d6;
+  max-width: 750px;
+  line-height: 1.75;
+}
+
+/* Tabs */
+
+.token-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid var(--border-dark);
+  padding-bottom: 1rem;
+}
+
+.token-tab {
+  background: #29292e;
+  color: #d1d1d6;
+  border: 1px solid #414149;
+  border-radius: var(--radius-sm);
+  padding: 0.8rem 1.2rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.token-tab:hover {
+  border-color: var(--accent-yellow);
+  color: #ffffff;
+}
+
+.token-tab.active {
+  background: var(--accent-yellow);
+  border-color: var(--accent-yellow);
+  color: #141415;
+}
+
+/* Main panels */
+
+.token-panel {
+  background: var(--bg-charcoal);
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.token-panel[hidden],
+.token-results[hidden] {
+  display: none !important;
+}
+
+.token-panel h2,
+.token-results h2,
+.token-reflection h2 {
+  color: #ffffff;
+  font-family: var(--font-serif);
+  font-size: 1.55rem;
+  margin-bottom: 1rem;
+}
+
+.token-panel p,
+.token-results p {
+  color: #c7c7cf;
+  line-height: 1.7;
+  margin-bottom: 1.4rem;
+}
+
+.token-panel > label {
+  display: block;
+  color: var(--accent-yellow);
+  font-size: 0.85rem;
+  font-weight: 700;
+  margin-bottom: 0.65rem;
+}
+
+.token-panel textarea {
+  display: block;
+  width: 100%;
+  min-height: 150px;
+  padding: 1.2rem;
+  background: #141415;
+  color: #ffffff;
+  border: 1px solid #414149;
+  border-radius: var(--radius-md);
+  font-family: var(--font-sans);
+  font-size: 1.05rem;
+  line-height: 1.8;
+  resize: vertical;
+  outline: none;
+}
+
+.token-panel textarea:focus {
+  border-color: var(--accent-yellow);
+  box-shadow: 0 0 0 2px rgba(255, 208, 0, 0.12);
+}
+
+/* Buttons */
+
+.token-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.4rem;
+}
+
+.token-reset {
+  padding: 0.8rem 1.2rem;
+  background: transparent;
+  color: #d1d1d6;
+  border: 1px solid #55555e;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.token-reset:hover {
+  border-color: var(--accent-yellow);
+  color: var(--accent-yellow);
+}
+
+/* Chinese segmentation options */
+
+.token-methods {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  border: 1px solid #414149;
+  border-radius: var(--radius-md);
+  padding: 1.2rem;
+  margin-top: 1.4rem;
+}
+
+.token-methods legend {
+  padding: 0 0.5rem;
+  color: var(--accent-yellow);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.token-methods label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #e4e4e7;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.token-methods input {
+  accent-color: var(--accent-yellow);
+  width: 16px;
+  height: 16px;
+}
+
+.token-method-note {
+  margin-top: 1rem;
+  font-size: 0.88rem;
+  color: #a1a1aa !important;
+}
+
+/* Analysis results */
+
+.token-results {
+  background: var(--bg-charcoal);
+  border: 1px solid var(--border-dark);
+  border-left: 4px solid var(--accent-yellow);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.token-metrics {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.token-metric {
+  display: flex;
+  flex-direction: column;
+  background: #141415;
+  border: 1px solid #414149;
+  border-radius: var(--radius-md);
+  padding: 1.3rem;
+}
+
+.token-metric-value {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--accent-yellow);
+}
+
+.token-metric-label {
+  color: #c7c7cf;
+  font-size: 0.9rem;
+  margin-top: 0.35rem;
+}
+
+.token-results h3 {
+  font-family: var(--font-sans);
+  color: #ffffff;
+  font-size: 1.1rem;
+  margin: 1.8rem 0 0.6rem;
+}
+
+/* Individual token boxes */
+
+.token-segments {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 1rem 0 2rem;
+}
+
+.token-unit {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 0.85rem;
+  background: #333339;
+  border: 1px solid #55555e;
+  border-radius: var(--radius-sm);
+  color: #ffffff;
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  overflow-wrap: anywhere;
+}
+
+/* Frequency table */
+
+.token-table-wrap {
+  overflow-x: auto;
+  border: 1px solid #414149;
+  border-radius: var(--radius-md);
+}
+
+.token-frequency-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+
+.token-frequency-table th {
+  background: #141415;
+  color: var(--accent-yellow);
+  text-align: left;
+  padding: 0.9rem 1rem;
+}
+
+.token-frequency-table td {
+  color: #e4e4e7;
+  padding: 0.85rem 1rem;
+  border-top: 1px solid #414149;
+}
+
+.token-frequency-table td:first-child {
+  font-family: var(--font-mono);
+}
+
+.token-frequency-table tr:hover td {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+/* Other languages */
+
+.token-coming-soon {
+  text-align: center;
+  padding: 3.5rem 2rem;
+}
+
+.token-spanner {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.token-coming-soon p {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Reflection */
+
+.token-reflection {
+  background: #222226;
+  border: 1px solid var(--border-dark);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-top: 1.5rem;
+}
+
+.token-reflection ol {
+  padding-left: 1.5rem;
+  color: #e4e4e7;
+  line-height: 1.8;
+}
+
+.token-reflection li {
+  margin-bottom: 0.8rem;
+}
+
+/* Footer */
+
+.token-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-dark);
+  color: #a1a1aa;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+/* Responsive layout */
+
+@media (max-width: 768px) {
+  .token-container {
+    width: min(100% - 2rem, 1050px);
+    padding-top: 2rem;
+  }
+
+  .token-panel,
+  .token-results,
+  .token-reflection {
+    padding: 1.4rem;
+  }
+
+  .token-tabs {
+    gap: 0.5rem;
+  }
+
+  .token-tab {
+    padding: 0.65rem 0.85rem;
+    font-size: 0.82rem;
+  }
+
+  .token-metric-value {
+    font-size: 2rem;
+  }
+}
+

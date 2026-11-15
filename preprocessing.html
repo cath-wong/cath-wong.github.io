@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -424,8 +425,6 @@ select:focus-visible {
 
 </main>
 
-<script src="https://unpkg.com/compromise@14/builds/compromise.min.js"></script>
-
 <script>
 'use strict';
 
@@ -581,96 +580,394 @@ function normalise() {
 $('n-apply').addEventListener('click', normalise);
 
 
-/* English lemmatisation using Compromise */
+// ==================================================
+// English lemmatisation
+// Rule-based teaching demonstrator
+// ==================================================
+
+const irregularLemmas = {
+  // Forms of 'be'
+  am: 'be', is: 'be', are: 'be',
+  was: 'be', were: 'be',
+  been: 'be', being: 'be',
+
+  // Forms of 'have'
+  has: 'have', had: 'have', having: 'have',
+
+  // Forms of 'do'
+  does: 'do', did: 'do',
+  done: 'do', doing: 'do',
+
+  // Forms of 'go'
+  goes: 'go', went: 'go',
+  gone: 'go', going: 'go',
+
+  // Common irregular verbs
+  saw: 'see', seen: 'see',
+  made: 'make',
+  took: 'take', taken: 'take',
+  gave: 'give', given: 'give',
+  came: 'come',
+  ran: 'run',
+  ate: 'eat', eaten: 'eat',
+  wrote: 'write', written: 'write',
+  spoke: 'speak', spoken: 'speak',
+  knew: 'know', known: 'know',
+  thought: 'think',
+  bought: 'buy',
+  brought: 'bring',
+  taught: 'teach',
+  caught: 'catch',
+  found: 'find',
+  left: 'leave',
+  felt: 'feel',
+  kept: 'keep',
+  slept: 'sleep',
+  told: 'tell',
+  sold: 'sell',
+  held: 'hold',
+  heard: 'hear',
+  lost: 'lose',
+  won: 'win',
+  met: 'meet',
+  sat: 'sit',
+  stood: 'stand',
+  understood: 'understand',
+  became: 'become',
+  began: 'begin', begun: 'begin',
+  broke: 'break', broken: 'break',
+  chose: 'choose', chosen: 'choose',
+  drove: 'drive', driven: 'drive',
+  fell: 'fall', fallen: 'fall',
+  flew: 'fly', flown: 'fly',
+  forgot: 'forget', forgotten: 'forget',
+  grew: 'grow', grown: 'grow',
+  paid: 'pay',
+  said: 'say',
+  sent: 'send',
+  sang: 'sing', sung: 'sing',
+  swam: 'swim', swum: 'swim',
+  wore: 'wear', worn: 'wear',
+
+  // Irregular plural nouns
+  children: 'child',
+  men: 'man',
+  women: 'woman',
+  mice: 'mouse',
+  geese: 'goose',
+  teeth: 'tooth',
+  feet: 'foot',
+  oxen: 'ox',
+  people: 'person',
+
+  // Common spelling adjustments
+  lying: 'lie',
+  dying: 'die',
+  tying: 'tie',
+  running: 'run',
+  swimming: 'swim',
+  sitting: 'sit',
+  stopping: 'stop',
+  getting: 'get',
+  beginning: 'begin',
+  planning: 'plan',
+  putting: 'put',
+  cutting: 'cut',
+
+  // Comparative and superlative forms
+  better: 'good',
+  best: 'good',
+  worse: 'bad',
+  worst: 'bad'
+};
+
+// Protect common uninflected words from suffix rules.
+
+const protectedWords = new Set([
+  'a', 'an', 'the', 'and', 'or', 'but',
+  'if', 'because', 'although', 'while',
+  'when', 'where', 'who', 'which', 'what',
+  'that', 'this', 'these', 'those',
+  'of', 'in', 'on', 'at', 'to', 'for',
+  'from', 'with', 'by', 'as', 'into',
+  'over', 'under', 'between', 'through',
+  'about', 'before', 'after', 'during',
+  'against', 'without', 'within',
+  'i', 'you', 'he', 'she', 'it',
+  'we', 'they', 'my', 'your', 'his',
+  'our', 'their', 'its', 'mine',
+  'yours', 'ours', 'theirs',
+  'not', 'no', 'yes', 'very',
+  'always', 'sometimes', 'perhaps',
+  'also', 'only', 'already',
+  'bus', 'gas', 'plus',
+  'class', 'glass', 'grass',
+  'mass', 'pass', 'kiss',
+  'news', 'series', 'species',
+  'analysis', 'basis', 'crisis',
+  'thesis', 'physics', 'mathematics',
+  'king', 'ring', 'sing', 'spring',
+  'bring', 'string', 'thing',
+  'something', 'nothing',
+  'morning', 'evening',
+  'interesting', 'amazing',
+  'long', 'young', 'strong',
+  'red', 'bed', 'need',
+  'hundred', 'indeed',
+  'address', 'business',
+  'process', 'success',
+  'access', 'unless',
+  'focus', 'status'
+]);
+
+// Common base forms help select the correct lemma.
+
+const knownBases = new Set([
+  'be', 'have', 'do', 'go',
+  'see', 'make', 'take', 'give',
+  'come', 'run', 'eat', 'write',
+  'speak', 'know', 'think', 'buy',
+  'bring', 'teach', 'catch',
+  'find', 'leave', 'feel', 'keep',
+  'sleep', 'tell', 'sell', 'hold',
+  'hear', 'lose', 'win', 'meet',
+  'sit', 'stand', 'understand',
+  'become', 'begin', 'break',
+  'choose', 'drive', 'fall',
+  'fly', 'forget', 'grow',
+  'pay', 'put', 'read', 'say',
+  'send', 'sing', 'swim', 'wear',
+
+  'walk', 'play', 'work', 'talk',
+  'look', 'watch', 'wash', 'wish',
+  'fix', 'mix', 'box', 'push',
+  'reach', 'touch', 'finish',
+  'study', 'try', 'carry', 'copy',
+  'reply', 'apply', 'worry',
+  'marry', 'cry',
+  'listen', 'visit', 'wait',
+  'want', 'need', 'help', 'ask',
+  'answer', 'open', 'close',
+  'use', 'move', 'love', 'like',
+  'live', 'dance', 'change',
+  'examine', 'imagine', 'create',
+  'describe', 'compare',
+  'analyse', 'organise',
+  'recognise', 'realise',
+  'analyze', 'organize',
+  'recognize', 'realize',
+  'prepare', 'develop', 'explore',
+  'observe', 'explain', 'learn',
+  'count', 'collect', 'clean',
+  'process', 'present', 'design',
+  'test', 'check', 'review',
+  'consider', 'include',
+  'introduce', 'produce',
+  'reduce', 'increase',
+  'decrease', 'discuss',
+  'discover', 'investigate',
+  'remember',
+
+  'stop', 'plan', 'get', 'cut',
+  'shop', 'drop', 'slip',
+  'hop', 'clap', 'grab',
+  'chat', 'nod',
+
+  'cat', 'dog', 'bird', 'horse',
+  'mouse', 'child', 'woman',
+  'man', 'person', 'parent',
+  'student', 'teacher',
+  'friend', 'family', 'baby',
+  'city', 'country', 'story',
+  'party', 'day', 'week', 'year',
+  'book', 'word', 'text',
+  'sentence', 'example',
+  'question',
+  'language', 'computer',
+  'tool', 'idea', 'method',
+  'result', 'garden', 'house',
+  'table', 'chair', 'room',
+  'school', 'university',
+  'class', 'box', 'bus',
+  'car', 'train', 'tree',
+  'flower', 'colour', 'color',
+  'king', 'queen', 'theatre',
+  'theater', 'film', 'song',
+  'poem', 'article', 'paper',
+  'research', 'project',
+  'data', 'information',
+  'analysis', 'corpus',
+  'pattern', 'form', 'type',
+  'token', 'lemma', 'noun',
+  'verb', 'name', 'time',
+  'place', 'thing', 'life'
+]);
+
+function getLemma(word) {
+  const w = word.toLowerCase();
+
+  // Irregular forms
+  if (Object.hasOwn(irregularLemmas, w)) {
+    return irregularLemmas[w];
+  }
+
+  // Recognised base words and exceptions
+  if (protectedWords.has(w) || knownBases.has(w)) {
+    return w;
+  }
+
+  // -ies: studies -> study, cities -> city
+  if (w.length > 4 && w.endsWith('ies')) {
+    return w.slice(0, -3) + 'y';
+  }
+
+  // -ied: studied -> study, tried -> try
+  if (w.length > 4 && w.endsWith('ied')) {
+    return w.slice(0, -3) + 'y';
+  }
+
+  // -ing: playing -> play, examining -> examine
+  if (w.length > 5 && w.endsWith('ing')) {
+    const stem = w.slice(0, -3);
+
+    // running -> run, stopping -> stop
+    if (
+      stem.length > 2 &&
+      stem.at(-1) === stem.at(-2) &&
+      !'aeiou'.includes(stem.at(-1))
+    ) {
+      return stem.slice(0, -1);
+    }
+
+    // making -> make, examining -> examine
+    if (knownBases.has(stem + 'e')) {
+      return stem + 'e';
+    }
+
+    return stem;
+  }
+
+  // -ed: walked -> walk, liked -> like
+  if (w.length > 4 && w.endsWith('ed')) {
+    const stem = w.slice(0, -2);
+
+    // stopped -> stop, planned -> plan
+    if (
+      stem.length > 2 &&
+      stem.at(-1) === stem.at(-2) &&
+      !'aeiou'.includes(stem.at(-1))
+    ) {
+      return stem.slice(0, -1);
+    }
+
+    // liked -> like, moved -> move
+    if (knownBases.has(stem + 'e')) {
+      return stem + 'e';
+    }
+
+    return stem;
+  }
+
+  // -es: watches -> watch, boxes -> box
+  if (
+    w.length > 4 &&
+    /(ches|shes|xes|zzes|sses)$/.test(w)
+  ) {
+    return w.slice(0, -2);
+  }
+
+  // -oes: potatoes -> potato
+  if (w.length > 4 && w.endsWith('oes')) {
+    return w.slice(0, -2);
+  }
+
+  // -s: cats -> cat, gardens -> garden
+  if (
+    w.length > 3 &&
+    w.endsWith('s') &&
+    !w.endsWith('ss') &&
+    !w.endsWith('us') &&
+    !w.endsWith('is')
+  ) {
+    return w.slice(0, -1);
+  }
+
+  return w;
+}
+
+// Lemma review and output
 
 let lemmaSource = '';
 let lemmaSuggestions = [];
+let lemmaCorrections = new Map();
 
-function getWords(text) {
-  return text.match(/[A-Za-z]+(?:'[A-Za-z]+)?/g) || [];
-}
-
-function suggestLemmas(text) {
-  if (typeof nlp === 'undefined') {
-    throw new Error('The NLP library could not be loaded.');
-  }
-
-  // Analyse the complete text for grammatical context.
-  const doc = nlp(text);
-
-  // Work on a separate copy so the original is preserved.
-  const processed = nlp(text);
-
-  // Convert recognised verbs to infinitives.
-  processed.verbs().toInfinitive();
-
-  // Convert recognised plural nouns to singular forms.
-  processed.nouns().isPlural().toSingular();
-
-  const originals = getWords(doc.text());
-  const transformed = getWords(processed.text());
-
-  if (originals.length !== transformed.length) {
-    throw new Error(
-      'The NLP analysis changed the token boundaries. ' +
-      'Please try a shorter text.'
-    );
-  }
-
-  return originals.map((word, index) => ({
-    original: word,
-    lemma: transformed[index]
-  }));
-}
+const lemmaPattern = /[A-Za-z]+(?:'[A-Za-z]+)?/g;
 
 function renderLemma() {
   let index = 0;
 
-  // Preserve the original spacing and punctuation.
-  const result = lemmaSource.replace(
-    /[A-Za-z]+(?:'[A-Za-z]+)?/g,
+  $('l-output').value = lemmaSource.replace(
+    lemmaPattern,
     word => {
-      const suggestion = lemmaSuggestions[index++];
+      const item = lemmaSuggestions[index++];
+      if (!item) return word;
 
-      if (!suggestion) return word;
+      const key = item.original.toLowerCase();
 
-      return suggestion.lemma;
+      return lemmaCorrections.has(key)
+        ? lemmaCorrections.get(key)
+        : item.lemma;
     }
   );
-
-  $('l-output').value = result;
 }
 
 function lemmatise() {
   lemmaSource = $('l-input').value;
+  lemmaSuggestions = [];
+  lemmaCorrections = new Map();
 
   $('rows').replaceChildren();
   $('review').classList.add('hidden');
 
   if (!lemmaSource.trim()) {
     $('l-output').value = '';
-    $('l-status').textContent = 'Please enter some text.';
+    $('l-status').textContent =
+      'Please enter some English text.';
     return;
   }
 
-  try {
-    lemmaSuggestions = suggestLemmas(lemmaSource);
-  } catch (error) {
-    $('l-output').value = '';
-    $('l-status').textContent = error.message;
+  const words = lemmaSource.match(lemmaPattern) || [];
+
+  if (words.length === 0) {
+    $('l-output').value = lemmaSource;
+    $('l-status').textContent =
+      'No English words were found.';
     return;
   }
 
-  let changes = 0;
+  lemmaSuggestions = words.map(word => ({
+    original: word,
+    lemma: getLemma(word)
+  }));
 
-  lemmaSuggestions.forEach((item, index) => {
-    if (item.original.toLowerCase() ===
-        item.lemma.toLowerCase()) {
-      return;
+  // Display each distinct changed form once.
+  const uniqueChanges = new Map();
+
+  lemmaSuggestions.forEach(item => {
+    const key = item.original.toLowerCase();
+
+    if (
+      key !== item.lemma.toLowerCase() &&
+      !uniqueChanges.has(key)
+    ) {
+      uniqueChanges.set(key, {
+        original: item.original,
+        lemma: item.lemma
+      });
     }
+  });
 
-    changes++;
-
+  uniqueChanges.forEach((item, key) => {
     const row = document.createElement('tr');
     const originalCell = document.createElement('td');
     const lemmaCell = document.createElement('td');
@@ -684,22 +981,34 @@ function lemmatise() {
       'Suggested lemma for ' + item.original
     );
 
+    // Apply edits to all occurrences of this form.
     input.addEventListener('input', () => {
-      lemmaSuggestions[index].lemma = input.value;
+      lemmaCorrections.set(key, input.value);
       renderLemma();
     });
 
     lemmaCell.append(input);
     row.append(originalCell, lemmaCell);
-
     $('rows').append(row);
   });
 
-  $('review').classList.toggle('hidden', changes === 0);
+  $('review').classList.toggle(
+    'hidden',
+    uniqueChanges.size === 0
+  );
+
+  const changedOccurrences =
+    lemmaSuggestions.filter(
+      item =>
+        item.original.toLowerCase() !==
+        item.lemma.toLowerCase()
+    ).length;
 
   $('l-status').textContent =
-    changes + ' suggested change(s). ' +
-    'Review the results before using them.';
+    changedOccurrences + ' word occurrence(s) ' +
+    'with suggested changes (' +
+    uniqueChanges.size + ' distinct forms). ' +
+    'Review the suggestions before using them.';
 
   renderLemma();
 }

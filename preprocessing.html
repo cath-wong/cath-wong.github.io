@@ -6,14 +6,17 @@
 
 <title>Text Preprocessing Lab | Week 2</title>
 
+<link rel="stylesheet" href="style.css?v=2">
+
 <style>
+
 :root {
-  --bg: #191b1e;
-  --panel: #25282c;
-  --line: #4a4d51;
-  --text: #f2f0ea;
-  --muted: #b9bbbd;
-  --accent: #f0cf69;
+  --bg: #141415;
+  --panel: #1f1f22;
+  --line: #2c2c32;
+  --text: #f4f4f6;
+  --muted: #d1d1d6;
+  --accent: #ffd000;
 }
 
 * {
@@ -24,7 +27,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--text);
-  font: 16px/1.55 system-ui, sans-serif;
+  font: 16px/1.6 var(--font-sans);
 }
 
 main {
@@ -37,13 +40,18 @@ a {
   color: var(--accent);
 }
 
+
 h1 {
+  font-family: var(--font-serif);
+  font-weight: 700;
   font-size: clamp(2rem, 5vw, 3rem);
   line-height: 1.15;
   margin: 8px 0;
 }
 
 h2 {
+  font-family: var(--font-serif);
+  font-weight: 700;
   font-size: 1.3rem;
   margin: 0 0 8px;
 }

@@ -352,13 +352,16 @@ select:focus-visible {
   <label for="l-input">Original English text</label>
 
   <textarea id="l-input">The children were running. A child runs and the women walked. The mice went home.</textarea>
-
-  <div class="notice">
-    Lemmatisation can depend on grammatical context.
-    For example, ‘saw’ can be a noun or the past tense of ‘see’.
-    This tool proposes lemmas for recognised forms and leaves
-    others unchanged. Check the suggestions carefully.
-  </div>
+ 
+<div class="notice">
+  <strong>A note on lemmatisation</strong><br>
+  This tool uses simplified, rule-based lemmatisation to
+  demonstrate how different word forms can be reduced to
+  a common base form. It does not analyse grammatical
+  context and may therefore produce incorrect results,
+  particularly for ambiguous words. Review the suggested
+  lemmas and correct them where necessary.
+</div>
 
   <div class="actions">
     <button class="action" id="l-apply">
